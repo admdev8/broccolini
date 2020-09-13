@@ -4,7 +4,8 @@ Functions such as Hashicorp Vault for authentication.
 """
 import os
 import logging
-from typing import Dict, Tuple
+
+from typing import Dict, Tuple, Any
 import hvac
 from hvac.v1 import Client
 
@@ -23,7 +24,7 @@ class VaultFunctions:
     output: return client
     """
 
-    def __init__(self, **kwargs: Dict[str, any]) -> None:  # type: ignore
+    def __init__(self, **kwargs: Dict[str, Any]) -> None:
         """Init class - vars are called in the function as needed."""
 
     def __repr__(self) -> str:  # pragma: no cover
