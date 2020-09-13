@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Provide non secret data here for all tests.
+
+Give data in various forms to the test functions.
+"""
+import random
+
+import pytest
+from faker import Faker
+
+
+@pytest.fixture()
+def return_data_dict():
+    """Provide dictionary values to functions."""
+    input_dict = dict(
+        github_token="GITHUB_TOKEN_FROM_CONFTEST",
+        vault_url="VAULT_URL_FROM_CONFTEST",
+        secret_path="greg_production/path1conftest",
+        secret=dict(secret_test_key="secret_value_from_conftest"),
+        twilio_account_sid="greg_production/twilio_data/TWILIO_ACCOUNT_SID",
+        twilio_path_auth_token="greg_production/twilio_data/TWILIO_AUTH_TOKEN",
+        twilio_notification_number="greg_production/twilio_data/TWILIO_NOTIFICATION_NUMBER",
+        twilio_phone_number="greg_production/twilio_data/TWILIO_PHONE_NUMBER",
+        written_directories=["dir_test1", "dir_test2", "dir_test3"],
+        valid_json_file_name="json_file_from_conftest.json",
+        faker_files=r"./tests/fake_data_from_conftest/training",
+    )
+    return input_dict
+
+
+@pytest.fixture
+def return_a_list():
+    """Function returns list values."""
+    input_list = [
+        {
+            "api_version": "v1alpha1",
+            "directorate_name": "directname",
+            "project_name": "PROJNAMEHERE",
+            "target_revision": "master",
+        },
+        {
+            "file1_name": "file_to_be_copied_created_by_conftest.txt",
+            "file2_name": "file2_to_be_copied_created_by_conftest.txt",
+        },
+        {
+            "api_version": "v1alpha2",
+            "directorate_name": "adsfdssd2",
+            "project_name": "PROJNAMEHERE2",
+            "target_revision": "targetrev",
+        },
+    ]
+    return input_list
+
+
+@pytest.fixture
+def create_generic_json_test_file(tmpdir_factory):
+    """create a generic test directory."""
+    folder_name = "generic_test_directory_json"
+    file_name = "generic_file_name_json.json"
+    a_dir = tmpdir_factory.mktemp(folder_name)
+    a_file = a_dir.join(file_name)
+    return a_file
+
+
+@pytest.fixture
+def create_dir_to_simulate_json_bulk_load_orig(tmpdir_factory):
+    """Create a directory with json files in it."""
+    json_string = """
+        {
+        "website": "website_from_conftest",
+        "topic": "json and python",
+        "year": 2019,
+        "list": [10, 20, 30]
+    }
+    """
+    folder_name = "folder_with_sample_json"
+    file_name = "json_vault_test_data.json"
+    a_dir = tmpdir_factory.mktemp(folder_name)
+    a_file = a_dir.join(file_name)
+
+    with open(a_file, "w") as file_p:
+        file_p.write(json_string)
+    return a_file
+
+
+# @pytest.fixture(scope="session", autouse=True)
+# def faker_session_locale():
+#     """Creates fake data for use in tests.
+
+#     Returns:
+#         [session_locale]: [description]
+#     """
+#     return ["en_US"]
+
+
+# @pytest.fixture(scope="session")
+# def create_test_directory(tmpdir_factory):
+#     """Create a test directory."""
+#     folder_name = "test_dir_created"
+#     a_dir = tmpdir_factory.mktemp(folder_name)
+#     return a_dir
+
+
+@pytest.fixture(scope="session")
+def create_list_of_filenames_and_directories(tmpdir_factory):
+    """Create a list of directories and files from various choices."""
+    folder_name = "test_dir_created"
+    test_dir_name = tmpdir_factory.mktemp(folder_name)
+    # print(f"testdirname {test_dir_name}")
+    fake = Faker("en_US")
+    base_file_name = "training/"
+    folder_list = ["python", "javascript", "network", "ml_ai"]
+    sub_directory_name_list = ["subdir_1", "subdir_2", "subdir_3"]
+    folder_type = random.choice(folder_list)
+    full_path = (
+        base_file_name
+        + folder_type
+        + "/"
+        + fake.file_name(extension="pdf", category="office")
+    )
+    file_path_and_name_list = []
+    for _ in range(5):
+        folder_type = random.choice(folder_list)
+        subdirectory = random.choice(sub_directory_name_list)
+        full_path = (
+            base_file_name
+            + folder_type
+            + "/"
+            + fake.file_name(extension="pdf", category="office")
+        )
+        full_path_subdir = (
+            base_file_name
+            + folder_type
+            + "/"
+            + subdirectory
+            + "/"
+            + fake.file_name(extension="pdf", category="office")
+        )
+        file_path_and_name_list.append(full_path)
+        file_path_and_name_list.append(full_path_subdir)
+    # return file_path_and_name_list
+    # list_of_directories = []
+    full_path_including_file = []
+    for each in file_path_and_name_list:
+        directory_and_path = str(test_dir_name) + "/" + each
+        full_path_including_file.append(directory_and_path)
+    return full_path_including_file, test_dir_name
+    #     object_path = Path(directory_and_path)
+    # return object_path
+    #     list_ = object_path.parts
+    #     directory_only = list_[:-1]
+    #     full_path_including_file.append(object_path.parts)
+    #     list_of_directories.append(directory_only)
+    #     # filename_only = object_path.name
+    #     # print(type(directory_only))
+    # input_dict = dict(
+    #     full_path_including_file=full_path_including_file,
+    #     list_of_directories=list_of_directories,
+    #     )
+    # return input_dict
+    # # return list_of_directories, full_path_including_file

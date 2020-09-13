@@ -1,0 +1,19 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    def __str__
+    def __init__
+    if self.debug:
+    if settings.DEBUG
+    raise AssertionError
+    raise NotImplementedError
+    raise ValueError
+    if 0:
+    if __name__ == .__main__.:
+omit =
+    *__init__.py
+    venv\Lib\site-packages\*
+    tests\*
+    tests\conftest.py
+    templates\*
