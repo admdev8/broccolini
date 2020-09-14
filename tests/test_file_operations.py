@@ -11,7 +11,6 @@ import logging
 from pathlib import Path
 from faker import Faker
 
-# from faker.providers import file
 from broccolini.fileoperation_functions import FileOperationFunctions
 
 logging.basicConfig(
@@ -38,20 +37,14 @@ class TestFileOperationsFunctions:
         regenerate this data manually if necessary
         """
         fake = Faker("en_US")
-        # print(create_list_of_filenames_and_directories)
         for each in create_list_of_filenames_and_directories[0]:
             object_path = Path(each)
-            # print(object_path)
             try:
                 Path(object_path.parent).mkdir(parents=True, exist_ok=True)
                 object_path.open("w")
-                # object_path.write_text('asdfksdfldsjf asdfdsfdfs')
                 object_path.write_text(fake.text())
-                # run file operation functions with the temp directory created
             except (FileNotFoundError, FileExistsError) as _error:
                 raise ValueError("Problem with file or directory!") from _error
-        # test_directory = create_list_of_filenames_and_directories[1]
-        # logging.debug(test_directory)
 
     @staticmethod
     def test_get_file_information_build(return_data_dict):
@@ -62,24 +55,20 @@ class TestFileOperationsFunctions:
             input_directory=return_data_dict["faker_files"],
             output_file_name=return_data_dict["output_file_name"],
         )
-        # logging.debug(return_data_dict["faker_files"])
         expected = r"fake_data_from_conftest/training/"
         expected_type, expected_len = list, 3
-        # assert expected in str(result)
-        # assert isinstance(result, expected_type)
-        # assert len(result) >= expected_len
-        # logging.debug(result)
+        assert expected in str(result)
+        assert isinstance(result, expected_type)
+        assert len(result) >= expected_len
 
-    # @staticmethod
-    # def test_build_dictionary(return_a_list):
-    #     """Get the test directory from conftest to run tests.
-    #     Need to get the correct data as input to the function
-    # Needs to map to what the real one is sending which is path and not a list
-    # """
-    #     result = FileOperationFunctions().build_dictionary(
-    #         input_list=return_a_list,
-    #     )
-    #     expected = 'api_version'
-    #     expected_type = dict
-    #     # assert isinstance(result, expected_type)
-    #     # assert expected in str(result)
+    @staticmethod
+    def test_build_dictionary(create_dir_to_simulate_json_bulk_load_orig):
+        """Get the test directory from conftest to run tests.
+        Need to get the correct data as input to the function
+    Needs to map to what the real one is sending which is path and not a list
+    """
+        input_path = Path(create_dir_to_simulate_json_bulk_load_orig)
+        result = FileOperationFunctions().build_dictionary(
+            input_path=input_path,
+        )
+        logging.debug(result)
