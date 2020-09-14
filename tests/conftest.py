@@ -84,6 +84,7 @@ def create_dir_to_simulate_json_bulk_load_orig(tmpdir_factory):
         file_p.write(json_string)
     return a_file
 
+
 @pytest.fixture(scope="session")
 def create_list_of_filenames_and_directories(tmpdir_factory):
     """Create a list of directories and files from various choices."""
