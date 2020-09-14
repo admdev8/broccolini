@@ -21,7 +21,14 @@ class DataBaseOperationFunctions:
         return f"{class_name}"
 
     @staticmethod
-    # def fauna_first(**kwargs: str) -> str:
-    def fauna_first() -> str:
-        """Builds dictionary of values."""
-        return "greg"
+    def fauna_first(**kwargs: str) -> str:
+        """Get Fauna Connection.
+
+        input: vault credentials from environment variables
+        input_type: str
+        output: fauna database connection
+        output_type: fauna client
+        """
+        fauna_secret_path = kwargs["fauna_secret_path"]
+        return fauna_secret_path
+

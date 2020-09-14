@@ -6,6 +6,7 @@ Testing common Database operations. Starting with www.faunadb.com.
 """
 
 import logging
+from faunadb.client import FaunaClient
 
 from broccolini.database_operations import DataBaseOperationFunctions
 
@@ -21,12 +22,14 @@ class TestDatabaseOperationsFunctions:
     """
 
     @staticmethod
-    def test_fauna_first():
+    def test_fauna_first(return_data_dict):
         """Test Fauna DB Connection"""
-        result = DataBaseOperationFunctions.fauna_first()
+        result = DataBaseOperationFunctions.fauna_first(
+            fauna_secret_path=return_data_dict["fauna_secret_path"],
+        )
         logging.debug(result)
-        # expected = r"fake_data_from_conftest/training/"
-        # expected_type, expected_len = list, 3
-        # assert expected in str(result)
-        # assert isinstance(result, expected_type)
-        # assert len(result) >= expected_len
+        expected = "fauna_secret_path1conftest"
+        expected_type, expected_len = str, 2
+        assert expected in str(result)
+        assert isinstance(result, expected_type)
+        assert len(result) >= expected_len
