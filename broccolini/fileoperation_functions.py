@@ -41,21 +41,12 @@ class FileOperationFunctions:
 
         """
         input_path: Path = kwargs["input_path"]
-
-        # list_of_files_and_folders: List[str] = []
-        # logging.debug(type(input_path))
-        # print(input_path.name)
-        # subject = input_path.name
-        # list_of_files_and_folders = list(input_path.rglob("*.*"))
-        # logging.debug(list_of_files_and_folders)
-        # logging.debug('\n')
         output_dict = dict(
             subject=input_path.name,
             folders_and_files=list(input_path.rglob("*.*")),
         )
-        # output_dict = dict(subject=input_path.name, list_of_files_and_folders=)
-        # list(input_path.rglob("*.*"),)
-        logging.debug(output_dict)
+        logging.debug(type(output_dict))
+        return output_dict
 
     @staticmethod
     def get_file_information_build(
