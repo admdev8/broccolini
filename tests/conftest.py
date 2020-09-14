@@ -5,7 +5,6 @@
 Give data in various forms to the test functions.
 """
 import random
-
 import pytest
 from faker import Faker
 
@@ -26,6 +25,7 @@ def return_data_dict():
         valid_json_file_name="json_file_from_conftest.json",
         faker_files=r"./tests/fake_data_from_conftest/training",
         output_file_name=r"./tests/__output_files/output_json_files.json",
+        input_directory_path=r"",
     )
     return input_dict
 
@@ -85,32 +85,17 @@ def create_dir_to_simulate_json_bulk_load_orig(tmpdir_factory):
     return a_file
 
 
-# @pytest.fixture(scope="session", autouse=True)
-# def faker_session_locale():
-#     """Creates fake data for use in tests.
-
-#     Returns:
-#         [session_locale]: [description]
-#     """
-#     return ["en_US"]
-
-
-# @pytest.fixture(scope="session")
-# def create_test_directory(tmpdir_factory):
-#     """Create a test directory."""
-#     folder_name = "test_dir_created"
-#     a_dir = tmpdir_factory.mktemp(folder_name)
-#     return a_dir
-
-
 @pytest.fixture(scope="session")
 def create_list_of_filenames_and_directories(tmpdir_factory):
     """Create a list of directories and files from various choices."""
-    folder_name = "test_dir_created"
-    test_dir_name = tmpdir_factory.mktemp(folder_name)
+    base_file_name = "test_dir_created/training/"
+    # base_file_name = "training/"
+    test_dir_name = tmpdir_factory.mktemp("test_dir_created")
+    # test_dir_name = tmpdir_factory.mktemp(base_file_name)
+    # test_dir_name = tmpdir_factory.mktemp()
     # print(f"testdirname {test_dir_name}")
     fake = Faker("en_US")
-    base_file_name = "training/"
+    # base_file_name = "training/"
     folder_list = ["python", "javascript", "network", "ml_ai"]
     sub_directory_name_list = ["subdir_1", "subdir_2", "subdir_3"]
     folder_type = random.choice(folder_list)
@@ -118,7 +103,7 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
         base_file_name
         + folder_type
         + "/"
-        + fake.file_name(extension="pdf", category="office")
+        + fake.file_name(extension="txt", category="office")
     )
     file_path_and_name_list = []
     for _ in range(5):
@@ -128,7 +113,7 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
             base_file_name
             + folder_type
             + "/"
-            + fake.file_name(extension="pdf", category="office")
+            + fake.file_name(extension="txt", category="office")
         )
         full_path_subdir = (
             base_file_name
@@ -136,7 +121,7 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
             + "/"
             + subdirectory
             + "/"
-            + fake.file_name(extension="pdf", category="office")
+            + fake.file_name(extension="txt", category="office")
         )
         file_path_and_name_list.append(full_path)
         file_path_and_name_list.append(full_path_subdir)
@@ -147,17 +132,3 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
         directory_and_path = str(test_dir_name) + "/" + each
         full_path_including_file.append(directory_and_path)
     return full_path_including_file, test_dir_name
-    #     object_path = Path(directory_and_path)
-    # return object_path
-    #     list_ = object_path.parts
-    #     directory_only = list_[:-1]
-    #     full_path_including_file.append(object_path.parts)
-    #     list_of_directories.append(directory_only)
-    #     # filename_only = object_path.name
-    #     # print(type(directory_only))
-    # input_dict = dict(
-    #     full_path_including_file=full_path_including_file,
-    #     list_of_directories=list_of_directories,
-    #     )
-    # return input_dict
-    # # return list_of_directories, full_path_including_file

@@ -11,7 +11,6 @@ import logging
 from pathlib import Path
 from faker import Faker
 
-# from faker.providers import file
 from broccolini.fileoperation_functions import FileOperationFunctions
 
 logging.basicConfig(
@@ -38,25 +37,19 @@ class TestFileOperationsFunctions:
         regenerate this data manually if necessary
         """
         fake = Faker("en_US")
-        # print(create_list_of_filenames_and_directories)
         for each in create_list_of_filenames_and_directories[0]:
             object_path = Path(each)
-            # print(object_path)
             try:
                 Path(object_path.parent).mkdir(parents=True, exist_ok=True)
                 object_path.open("w")
-                # object_path.write_text('asdfksdfldsjf asdfdsfdfs')
                 object_path.write_text(fake.text())
-                # run file operation functions with the temp directory created
             except (FileNotFoundError, FileExistsError) as _error:
                 raise ValueError("Problem with file or directory!") from _error
-        # test_directory = create_list_of_filenames_and_directories[1]
-        # logging.debug(test_directory)
 
     @staticmethod
-    def test_open_directory_begin_processing(return_data_dict):
+    def test_get_file_information_build(return_data_dict):
         """Get the test directory from conftest to run tests."""
-        result = FileOperationFunctions().open_directory_begin_processing(
+        result = FileOperationFunctions().get_file_information_build(
             input_directory=return_data_dict["faker_files"],
             output_file_name=return_data_dict["output_file_name"],
         )
@@ -65,15 +58,19 @@ class TestFileOperationsFunctions:
         assert expected in str(result)
         assert isinstance(result, expected_type)
         assert len(result) >= expected_len
-        # logging.debug(result)
 
     @staticmethod
-    def test_build_dictionary(return_a_list):
-        """Get the test directory from conftest to run tests."""
+    def test_build_dictionary(create_list_of_filenames_and_directories):
+        """Get the test directory from conftest to run tests.
+
+        Gets folder path from conftest and feeds to the function as a pathlib object
+        """
         result = FileOperationFunctions().build_dictionary(
-            input_list=return_a_list,
+            input_path=Path(create_list_of_filenames_and_directories[1]),
         )
         logging.debug(result)
-        # logging.debug(return_a_list)
-        expected_type = dict
+        expected = "test_dir_created"
+        expected_type, expected_len = dict, 9
+        assert expected in str(result)
         assert isinstance(result, expected_type)
+        assert len(result["folders_and_files"]) >= expected_len
