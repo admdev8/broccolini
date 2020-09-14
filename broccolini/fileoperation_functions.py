@@ -26,7 +26,7 @@ class FileOperationFunctions:
         return f"{class_name}"
 
     @staticmethod
-    def build_dictionary(**kwargs: List[str]) -> Dict[str, Sequence[str]]:
+    def build_dictionary(**kwargs: List[Dict[str, object]]) -> Dict[str, object]:
         """Builds dictionary of values.
 
         input: pathlib data
@@ -34,9 +34,10 @@ class FileOperationFunctions:
         output: dictionary of values
         output_type: dict
         """
-        input_list: List[str] = kwargs["input_list"]
+        input_list: List[Dict[str, object]] = kwargs["input_list"]
+        # input_list: List[str] = kwargs["input_list"]
         # input_list = self.input_list
-        # logging.debug(input_list)
+        logging.debug(type(input_list))
         output_dict = dict(
             subject=input_list,
             filename_of_dir_listing="filename_recursive_dir",
@@ -45,19 +46,27 @@ class FileOperationFunctions:
         return output_dict
 
     @staticmethod
-    def open_directory_begin_processing(
-        **kwargs: str,
-    ) -> List[Dict[str, Sequence[str]]]:
-        """Build data about file structure."""
+    def open_directory_begin_processing(**kwargs: str,) -> List[Dict[str, object]]:
+        """Build data about file structure.
+
+        input: input_directory
+        input_type = input_directory
+        output: output_listing
+        output_type = List[str]
+        """
         input_directory: str = kwargs["input_directory"]
-        # output_file_name: str = kwargs["output_file_name"]
         path = Path(input_directory)
-        # folder_list = [_ for _ in path.iterdir()]
-        folder_list = []
+        folder_list: List[Path] = []
         for each in path.iterdir():
             folder_list.append(each)
-        output_listing = []
+        # output_listing: List[Dict[str, object]] = []
+        output_listing: List[Dict[str, object]] = []
+        # output_listing: List[Dict[str, Sequence[str]]] = []
         for each in folder_list:
-            write_to_json = FileOperationFunctions.build_dictionary(input_list=each)
+            # print(type(each))
+            write_to_json: Dict[str, object] = FileOperationFunctions.build_dictionary(
+                input_list=each
+            )
             output_listing.append(write_to_json)
+        logging.debug(type(output_listing))
         return output_listing
