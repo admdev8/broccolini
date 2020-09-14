@@ -26,23 +26,39 @@ class FileOperationFunctions:
         return f"{class_name}"
 
     @staticmethod
-    def build_dictionary(**kwargs: List[Dict[str, object]]) -> Dict[str, object]:
+    def build_dictionary(**kwargs: Path) -> Dict[str, object]:
+    # def build_dictionary(**kwargs: List[Dict[str, object]]) -> Dict[str, object]:
         """Builds dictionary of values.
 
-        input: input_list
+        input: input_list list of directories to process
         input_type: str
         output: output_dict
         output_type: dict
+        dictionary includes:
+        subject - from pathlib
+        modification date - from pathlib
+        list of files run pathlib command to get list of files
+
         """
-        input_list: List[Dict[str, object]] = kwargs["input_list"]
+        input_path: Path = kwargs["input_path"]
+
+        # list_of_files_and_folders: List[str] = []
+        # logging.debug(type(input_path))
+        # print(input_path.name)
+        # subject = input_path.name
+        # list_of_files_and_folders = list(input_path.rglob("*.*"))
+        # logging.debug(list_of_files_and_folders)
+        # logging.debug('\n')
         output_dict = dict(
-            subject=input_list,
-            filename_of_dir_listing="filename_recursive_dir",
+            subject=input_path.name,
+            folders_and_files=list(input_path.rglob("*.*")),
         )
-        return output_dict
+        # output_dict = dict(subject=input_path.name, list_of_files_and_folders=)
+        # list(input_path.rglob("*.*"),)
+        logging.debug(output_dict)
 
     @staticmethod
-    def open_directory_begin_processing(
+    def get_file_information_build(
         **kwargs: str,
     ) -> List[Dict[str, object]]:
         """Build data about file structure.
@@ -57,11 +73,21 @@ class FileOperationFunctions:
         folder_list: List[Path] = []
         for each in path.iterdir():
             folder_list.append(each)
+        logging.debug(folder_list)
+
         output_listing: List[Dict[str, object]] = []
         for each in folder_list:
+            # logging.debug(type(each))
             write_to_json: Dict[str, object] = FileOperationFunctions.build_dictionary(
-                input_list=each
+                input_path=each
             )
+            # sending a path not a list
+            logging.debug(each)
+            logging.debug('\n')
+
+            # not sending a list acting on each file in the for loop
+            # collecting data in write to json
+            # then writing write_to_json to json file on distk
             output_listing.append(write_to_json)
         logging.debug(output_listing)
         return output_listing
