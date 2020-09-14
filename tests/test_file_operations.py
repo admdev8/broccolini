@@ -66,3 +66,15 @@ class TestFileOperationsFunctions:
         # assert isinstance(result, expected_type)
         # assert len(result) >= expected_len
         # logging.debug(result)
+
+    @staticmethod
+    def test_build_dictionary(return_a_list):
+        """Get the test directory from conftest to run tests."""
+        result = FileOperationFunctions().build_dictionary(
+            input_list=return_a_list,
+        )
+        logging.debug(result)
+        # logging.debug(return_a_list)
+        expected_type = dict
+        assert isinstance(result, expected_type)
+

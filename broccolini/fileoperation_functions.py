@@ -35,9 +35,11 @@ class FileOperationFunctions:
         """
         input_list: List[str] = kwargs["input_list"]
         # input_list = self.input_list
-        logging.debug(input_list)
+        # logging.debug(input_list)
         output_dict = dict(
-            subject="subject data", filename_of_dir_listing="filename_recursive_dir",
+            subject=input_list,
+            filename_of_dir_listing="filename_recursive_dir",
+            # subject="subject data", filename_of_dir_listing="filename_recursive_dir",
         )
         return output_dict
 
@@ -50,5 +52,5 @@ class FileOperationFunctions:
         folder_list = [_ for _ in path.iterdir()]
         for each in folder_list:
             # print(f" each in folder list {build_dictionary(each)}")
-            greg = FileOperationFunctions.build_dictionary(input_list=each)
-            logging.debug(greg)
+            write_to_json = FileOperationFunctions.build_dictionary(input_list=each)
+            logging.debug(write_to_json)
