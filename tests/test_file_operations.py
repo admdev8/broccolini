@@ -48,13 +48,13 @@ class TestFileOperationsFunctions:
 
     @staticmethod
     def test_get_file_information_build(return_data_dict):
-        """Get the test directory from conftest to run tests.
-
-        """
+        """Get the test directory from conftest to run tests."""
         result = FileOperationFunctions().get_file_information_build(
             input_directory=return_data_dict["faker_files"],
             output_file_name=return_data_dict["output_file_name"],
         )
+
+
         expected = r"fake_data_from_conftest/training/"
         expected_type, expected_len = list, 3
         assert expected in str(result)
@@ -64,11 +64,14 @@ class TestFileOperationsFunctions:
     @staticmethod
     def test_build_dictionary(create_dir_to_simulate_json_bulk_load_orig):
         """Get the test directory from conftest to run tests.
-        Need to get the correct data as input to the function
-    Needs to map to what the real one is sending which is path and not a list
-    """
-        input_path = Path(create_dir_to_simulate_json_bulk_load_orig)
+
+        Gets folder path from conftest and feeds to the function as a pathlib object
+        """
         result = FileOperationFunctions().build_dictionary(
-            input_path=input_path,
+            input_path=Path(create_dir_to_simulate_json_bulk_load_orig),
         )
+        expected = r"json_vault_test_data.json"
+        expected_type = dict
+        assert expected in str(result)
+        assert isinstance(result, expected_type)
         logging.debug(result)
