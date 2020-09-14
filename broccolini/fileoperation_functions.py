@@ -5,7 +5,7 @@ File operations, eg, open close read write.
 
 import logging
 from pathlib import Path
-from typing import List, Dict, Sequence
+from typing import List, Dict
 
 # from broccolini.json_functions import JsonFunctions
 
@@ -27,7 +27,7 @@ class FileOperationFunctions:
 
     @staticmethod
     def build_dictionary(**kwargs: Path) -> Dict[str, object]:
-    # def build_dictionary(**kwargs: List[Dict[str, object]]) -> Dict[str, object]:
+        # def build_dictionary(**kwargs: List[Dict[str, object]]) -> Dict[str, object]:
         """Builds dictionary of values.
 
         input: pathlib path object from the file system
@@ -76,7 +76,7 @@ class FileOperationFunctions:
             )
             # sending a path not a list
             logging.debug(each)
-            logging.debug('\n')
+            logging.debug("\n")
 
             # not sending a list acting on each file in the for loop
             # collecting data in write to json
@@ -84,4 +84,3 @@ class FileOperationFunctions:
             output_listing.append(write_to_json)
         logging.debug(output_listing)
         return output_listing
-

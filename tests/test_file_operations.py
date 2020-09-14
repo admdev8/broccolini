@@ -53,13 +53,11 @@ class TestFileOperationsFunctions:
             input_directory=return_data_dict["faker_files"],
             output_file_name=return_data_dict["output_file_name"],
         )
-
-
         expected = r"fake_data_from_conftest/training/"
         expected_type, expected_len = list, 3
-        # assert expected in str(result)
-        # assert isinstance(result, expected_type)
-        # assert len(result) >= expected_len
+        assert expected in str(result)
+        assert isinstance(result, expected_type)
+        assert len(result) >= expected_len
 
     @staticmethod
     def test_build_dictionary(create_dir_to_simulate_json_bulk_load_orig):

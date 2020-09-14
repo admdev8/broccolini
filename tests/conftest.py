@@ -26,7 +26,7 @@ def return_data_dict():
         valid_json_file_name="json_file_from_conftest.json",
         faker_files=r"./tests/fake_data_from_conftest/training",
         output_file_name=r"./tests/__output_files/output_json_files.json",
-        input_directory_path=r'',
+        input_directory_path=r"",
     )
     return input_dict
 
