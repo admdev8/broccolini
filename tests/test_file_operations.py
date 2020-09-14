@@ -73,7 +73,7 @@ class TestFileOperationsFunctions:
         result = FileOperationFunctions().build_dictionary(
             input_list=return_a_list,
         )
-        logging.debug(result)
-        # logging.debug(return_a_list)
+        expected = 'api_version'
         expected_type = dict
         assert isinstance(result, expected_type)
+        assert expected in str(result)

@@ -29,19 +29,15 @@ class FileOperationFunctions:
     def build_dictionary(**kwargs: List[Dict[str, object]]) -> Dict[str, object]:
         """Builds dictionary of values.
 
-        input: pathlib data
+        input: input_list
         input_type: str
-        output: dictionary of values
+        output: output_dict
         output_type: dict
         """
         input_list: List[Dict[str, object]] = kwargs["input_list"]
-        # input_list: List[str] = kwargs["input_list"]
-        # input_list = self.input_list
-        logging.debug(type(input_list))
         output_dict = dict(
             subject=input_list,
             filename_of_dir_listing="filename_recursive_dir",
-            # subject="subject data", filename_of_dir_listing="filename_recursive_dir",
         )
         return output_dict
 
@@ -61,14 +57,12 @@ class FileOperationFunctions:
         folder_list: List[Path] = []
         for each in path.iterdir():
             folder_list.append(each)
-        # output_listing: List[Dict[str, object]] = []
         output_listing: List[Dict[str, object]] = []
-        # output_listing: List[Dict[str, Sequence[str]]] = []
         for each in folder_list:
-            # print(type(each))
             write_to_json: Dict[str, object] = FileOperationFunctions.build_dictionary(
                 input_list=each
             )
             output_listing.append(write_to_json)
-        logging.debug(type(output_listing))
+        logging.debug(output_listing)
         return output_listing
+
