@@ -46,7 +46,9 @@ class FileOperationFunctions:
         return output_dict
 
     @staticmethod
-    def open_directory_begin_processing(**kwargs: str,) -> List[Dict[str, object]]:
+    def open_directory_begin_processing(
+        **kwargs: str,
+    ) -> List[Dict[str, object]]:
         """Build data about file structure.
 
         input: input_directory
