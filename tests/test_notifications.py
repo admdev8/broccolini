@@ -29,8 +29,8 @@ class TestTwilioFunctions:
             )
             auth_token = twilio_path_auth_token_key["data"]["data"]["_key"]
             return auth_token
-        except KeyError as errinfo:
-            raise ValueError(f"Missing environment variables {errinfo}")
+        except KeyError as _error:
+            raise ValueError("Missing environment variables") from _error
 
     @staticmethod
     @pytest.mark.dependency(name="test_login_to_twilio")

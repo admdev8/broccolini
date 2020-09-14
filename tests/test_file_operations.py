@@ -62,9 +62,9 @@ class TestFileOperationsFunctions:
         )
         expected = r"fake_data_from_conftest/training/"
         expected_type, expected_len = list, 3
-        # assert expected in str(result)
-        # assert isinstance(result, expected_type)
-        # assert len(result) >= expected_len
+        assert expected in str(result)
+        assert isinstance(result, expected_type)
+        assert len(result) >= expected_len
         # logging.debug(result)
 
     @staticmethod
@@ -77,4 +77,3 @@ class TestFileOperationsFunctions:
         # logging.debug(return_a_list)
         expected_type = dict
         assert isinstance(result, expected_type)
-
