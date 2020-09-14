@@ -44,10 +44,16 @@ class FileOperationFunctions:
         """
         input_path: Path = kwargs["input_path"]
         output_dict = dict(
+            full_path=input_path,
+            name_or_subject=input_path.name,
+            parent=input_path.parent,
+            stem=input_path.stem,
+            parts=list(input_path.parts),
             subject=input_path.name,
             folders_and_files=list(input_path.rglob("*.*")),
         )
         # logging.debug(type(output_dict))
+        # folders and files has everything we need it has the
         return output_dict
 
     @staticmethod

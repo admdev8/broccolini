@@ -5,7 +5,6 @@
 Give data in various forms to the test functions.
 """
 import random
-
 import pytest
 from faker import Faker
 
@@ -85,57 +84,14 @@ def create_dir_to_simulate_json_bulk_load_orig(tmpdir_factory):
         file_p.write(json_string)
     return a_file
 
-@pytest.fixture
-def build_directory_script_generate_files(tmpdir_factory):
-    """Create a directory for fileoperation functions.
-
-    need to create 3 subdirectories here
-
-
-    """
-    json_string = """
-        {
-        "website": "website_from_conftest",
-        "topic": "json and python",
-        "year": 2019,
-        "list": [10, 20, 30]
-    }
-    """
-    folder_name = "folder_with_sample_json"
-    file_name = "json_vault_test_data.json"
-    a_dir = tmpdir_factory.mktemp(folder_name)
-    a_file = a_dir.join(file_name)
-
-    with open(a_file, "w") as file_p:
-        file_p.write(json_string)
-    return a_file
-
-
-# @pytest.fixture(scope="session", autouse=True)
-# def faker_session_locale():
-#     """Creates fake data for use in tests.
-
-#     Returns:
-#         [session_locale]: [description]
-#     """
-#     return ["en_US"]
-
-
-# @pytest.fixture(scope="session")
-# def create_test_directory(tmpdir_factory):
-#     """Create a test directory."""
-#     folder_name = "test_dir_created"
-#     a_dir = tmpdir_factory.mktemp(folder_name)
-#     return a_dir
-
-
 @pytest.fixture(scope="session")
 def create_list_of_filenames_and_directories(tmpdir_factory):
     """Create a list of directories and files from various choices."""
-    # folder_name = "test_dir_created"
-    base_file_name = "training/"
-    # test_dir_name = tmpdir_factory.mktemp("test_dir_created")
-    test_dir_name = tmpdir_factory.mktemp(base_file_name)
+    base_file_name = "test_dir_created/training/"
+    # base_file_name = "training/"
+    test_dir_name = tmpdir_factory.mktemp("test_dir_created")
+    # test_dir_name = tmpdir_factory.mktemp(base_file_name)
+    # test_dir_name = tmpdir_factory.mktemp()
     # print(f"testdirname {test_dir_name}")
     fake = Faker("en_US")
     # base_file_name = "training/"
@@ -175,17 +131,3 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
         directory_and_path = str(test_dir_name) + "/" + each
         full_path_including_file.append(directory_and_path)
     return full_path_including_file, test_dir_name
-    #     object_path = Path(directory_and_path)
-    # return object_path
-    #     list_ = object_path.parts
-    #     directory_only = list_[:-1]
-    #     full_path_including_file.append(object_path.parts)
-    #     list_of_directories.append(directory_only)
-    #     # filename_only = object_path.name
-    #     # print(type(directory_only))
-    # input_dict = dict(
-    #     full_path_including_file=full_path_including_file,
-    #     list_of_directories=list_of_directories,
-    #     )
-    # return input_dict
-    # # return list_of_directories, full_path_including_file

@@ -68,4 +68,8 @@ class TestFileOperationsFunctions:
         result = FileOperationFunctions().build_dictionary(
             input_path=Path(create_list_of_filenames_and_directories[1]),
         )
-        logging.debug(result)
+        # logging.debug(result)
+        for key, value in result.items():
+            print(f'key:{key} value:{value}\n')
+
+
