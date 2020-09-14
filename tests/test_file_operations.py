@@ -69,7 +69,10 @@ class TestFileOperationsFunctions:
             input_path=Path(create_list_of_filenames_and_directories[1]),
         )
         # logging.debug(result)
-        for key, value in result.items():
-            print(f'key:{key} value:{value}\n')
+        import pprint as pp
+        pp.pprint(result)
+        # for key, value in result.items():
+        #     print(f'key:{key} value:{value}\n')
+
 
 
