@@ -54,9 +54,9 @@ class TestFileOperationsFunctions:
         # logging.debug(test_directory)
 
     @staticmethod
-    def test_open_directory_build_db_of_metadata(return_data_dict):
+    def test_open_directory_begin_processing(return_data_dict):
         """Get the test directory from conftest to run tests."""
-        result = FileOperationFunctions().open_directory_build_db_of_metadata(
+        result = FileOperationFunctions().open_directory_begin_processing(
             input_directory=return_data_dict["faker_files"],
             output_file_name=return_data_dict["output_file_name"],
         )
