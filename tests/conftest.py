@@ -85,6 +85,31 @@ def create_dir_to_simulate_json_bulk_load_orig(tmpdir_factory):
         file_p.write(json_string)
     return a_file
 
+@pytest.fixture
+def build_directory_script_generate_files(tmpdir_factory):
+    """Create a directory for fileoperation functions.
+
+    need to create 3 subdirectories here
+
+
+    """
+    json_string = """
+        {
+        "website": "website_from_conftest",
+        "topic": "json and python",
+        "year": 2019,
+        "list": [10, 20, 30]
+    }
+    """
+    folder_name = "folder_with_sample_json"
+    file_name = "json_vault_test_data.json"
+    a_dir = tmpdir_factory.mktemp(folder_name)
+    a_file = a_dir.join(file_name)
+
+    with open(a_file, "w") as file_p:
+        file_p.write(json_string)
+    return a_file
+
 
 # @pytest.fixture(scope="session", autouse=True)
 # def faker_session_locale():

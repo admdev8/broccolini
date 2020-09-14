@@ -60,20 +60,12 @@ class TestFileOperationsFunctions:
         assert len(result) >= expected_len
 
     @staticmethod
-    def test_build_dictionary(create_dir_to_simulate_json_bulk_load_orig):
+    def test_build_dictionary(create_list_of_filenames_and_directories):
         """Get the test directory from conftest to run tests.
 
         Gets folder path from conftest and feeds to the function as a pathlib object
         """
-        # cwd = Path.cwd()
         result = FileOperationFunctions().build_dictionary(
-            input_path=Path(create_dir_to_simulate_json_bulk_load_orig),
-            # input_path=Path(r'fake_data_from_conftest/training/')
-            # input_path=Path(cwd)
+            input_path=Path(create_list_of_filenames_and_directories[1]),
         )
-        # expected = r"json_vault_test_data.json"
-        # expected = r"training"
-        # expected_type = dict
-        # assert expected in str(result)
-        # assert isinstance(result, expected_type)
         logging.debug(result)
