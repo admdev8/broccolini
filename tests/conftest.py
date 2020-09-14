@@ -107,11 +107,13 @@ def create_dir_to_simulate_json_bulk_load_orig(tmpdir_factory):
 @pytest.fixture(scope="session")
 def create_list_of_filenames_and_directories(tmpdir_factory):
     """Create a list of directories and files from various choices."""
-    folder_name = "test_dir_created"
-    test_dir_name = tmpdir_factory.mktemp(folder_name)
+    # folder_name = "test_dir_created"
+    base_file_name = "training/"
+    # test_dir_name = tmpdir_factory.mktemp("test_dir_created")
+    test_dir_name = tmpdir_factory.mktemp(base_file_name)
     # print(f"testdirname {test_dir_name}")
     fake = Faker("en_US")
-    base_file_name = "training/"
+    # base_file_name = "training/"
     folder_list = ["python", "javascript", "network", "ml_ai"]
     sub_directory_name_list = ["subdir_1", "subdir_2", "subdir_3"]
     folder_type = random.choice(folder_list)
@@ -119,7 +121,7 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
         base_file_name
         + folder_type
         + "/"
-        + fake.file_name(extension="pdf", category="office")
+        + fake.file_name(extension="txt", category="office")
     )
     file_path_and_name_list = []
     for _ in range(5):
@@ -129,7 +131,7 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
             base_file_name
             + folder_type
             + "/"
-            + fake.file_name(extension="pdf", category="office")
+            + fake.file_name(extension="txt", category="office")
         )
         full_path_subdir = (
             base_file_name
@@ -137,7 +139,7 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
             + "/"
             + subdirectory
             + "/"
-            + fake.file_name(extension="pdf", category="office")
+            + fake.file_name(extension="txt", category="office")
         )
         file_path_and_name_list.append(full_path)
         file_path_and_name_list.append(full_path_subdir)
