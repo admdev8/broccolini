@@ -25,6 +25,7 @@ def return_data_dict():
         written_directories=["dir_test1", "dir_test2", "dir_test3"],
         valid_json_file_name="json_file_from_conftest.json",
         faker_files=r"./tests/fake_data_from_conftest/training",
+        output_file_name=r"./tests/__output_files/output_json_files.json",
     )
     return input_dict
 
