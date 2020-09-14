@@ -68,11 +68,12 @@ class TestFileOperationsFunctions:
         result = FileOperationFunctions().build_dictionary(
             input_path=Path(create_list_of_filenames_and_directories[1]),
         )
-        # logging.debug(result)
-        import pprint as pp
-        pp.pprint(result)
-        # for key, value in result.items():
-        #     print(f'key:{key} value:{value}\n')
+        logging.debug(result)
+        expected_type, expected_len = dict, 9
+        # assert expected in str(result)
+        assert isinstance(result, expected_type)
+        assert len(result['folders_and_files']) >= expected_len
+
 
 
 
