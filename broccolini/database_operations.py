@@ -31,4 +31,3 @@ class DataBaseOperationFunctions:
         """
         fauna_secret_path = kwargs["fauna_secret_path"]
         return fauna_secret_path
-
