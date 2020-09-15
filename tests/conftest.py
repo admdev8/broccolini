@@ -16,6 +16,7 @@ def return_data_dict():
         github_token="GITHUB_TOKEN_FROM_CONFTEST",
         vault_url="VAULT_URL_FROM_CONFTEST",
         secret_path="greg_production/path1conftest",
+        fauna_secret_path="greg_production/fauna_db/api_token",
         secret=dict(secret_test_key="secret_value_from_conftest"),
         twilio_account_sid="greg_production/twilio_data/TWILIO_ACCOUNT_SID",
         twilio_path_auth_token="greg_production/twilio_data/TWILIO_AUTH_TOKEN",

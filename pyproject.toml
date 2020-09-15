@@ -24,6 +24,7 @@ readme = "README.md"
 python = "^3.8"
 twilio = "^6.45.1"
 hvac = "^0.10.5"
+faunadb = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
