@@ -6,8 +6,10 @@ Testing common Database operations. Starting with www.faunadb.com.
 """
 
 import logging
+
 import pytest
 from faunadb.client import FaunaClient
+
 from broccolini.authentication_functions import VaultFunctions
 from broccolini.database_operations import DataBaseOperationFunctions
 

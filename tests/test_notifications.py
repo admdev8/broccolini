@@ -5,10 +5,12 @@
 Testing notifications including twilio.
 """
 import logging
+
 import pytest
 from twilio.rest import Client  # type: ignore
-from broccolini.notifications import TwilioFunctions
+
 from broccolini.authentication_functions import VaultFunctions
+from broccolini.notifications import TwilioFunctions
 
 logging.basicConfig(
     level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"

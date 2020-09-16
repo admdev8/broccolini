@@ -2,10 +2,10 @@
 
 Functions such as Hashicorp Vault for authentication.
 """
-import os
 import logging
+import os
+from typing import Any, Dict, Tuple
 
-from typing import Dict, Tuple, Any
 import hvac
 from hvac.v1 import Client
 

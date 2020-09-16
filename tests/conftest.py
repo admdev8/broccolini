@@ -5,6 +5,7 @@
 Give data in various forms to the test functions.
 """
 import random
+
 import pytest
 from faker import Faker
 

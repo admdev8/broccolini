@@ -3,8 +3,9 @@
 Notification functions including twilio.
 """
 import logging
+
+from twilio.base.exceptions import TwilioException, TwilioRestException
 from twilio.rest import Client
-from twilio.base.exceptions import TwilioRestException, TwilioException
 
 logging.basicConfig(
     level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"

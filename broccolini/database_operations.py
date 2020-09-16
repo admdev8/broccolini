@@ -3,8 +3,9 @@
 DataBase operations.
 """
 import logging
-from faunadb.client import FaunaClient
+
 from faunadb import query as q
+from faunadb.client import FaunaClient
 
 # from faunadb.objects import Ref
 

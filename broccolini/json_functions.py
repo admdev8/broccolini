@@ -3,9 +3,9 @@
 Json functions.  Mostly wrappers.
 """
 
-import logging
 import json
-from typing import Tuple, Dict
+import logging
+from typing import Dict, Tuple
 
 logging.basicConfig(
     level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
