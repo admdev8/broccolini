@@ -4,6 +4,9 @@ DataBase operations.
 """
 import logging
 from faunadb.client import FaunaClient
+from faunadb import query as q
+from faunadb.objects import Ref
+
 
 logging.basicConfig(
     level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
@@ -38,6 +41,26 @@ class DataBaseOperationFunctions:
         """
         try:
             client = FaunaClient(secret=self.client_token)
-            return client
+            return client, self.client_token
         except Exception as _errorinfo:  # pragma: no cover
             raise ValueError("error connecting") from _errorinfo
+
+    def fauna_read_database(self) -> FaunaClient:
+        """Read from fauna database."""
+        # start by using client actual password to login and read database
+        # then switch to use client token to login
+        # then create a collection
+        logging.debug(self.client_token)
+        # client = FaunaClient(secret=r'fnAD1wkhl0ACErmrU_-6R9ZX70GBygBHmt53vxdB')
+        # client = FaunaClient(secret=self.client_token)
+        # # return client
+        # indexes = client.query(q.paginate(q.indexes()))
+        # return indexes
+
+
+
+
+
+
+
+

@@ -73,5 +73,7 @@ class TwilioFunctions:
                 to=twilio_notification_number,
             )
             return f"successful message_sid:{message.sid}:"
-        except (TwilioException, TwilioRestException) as error:  # pragma: no cover
-            return f"exception as {error}"
+        except (TwilioException, TwilioRestException) as _error:  # pragma: no cover
+            raise ValueError(
+                "Permission Denied, please check your permissions and the path to the secret!"
+            ) from _error
