@@ -1,10 +1,6 @@
 # broccolini
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![CI_WITH_POETRY](https://github.com/pythonrising/broccolini/workflows/CI_WITH_POETRY/badge.svg)
-![CodeQL](https://github.com/pythonrising/broccolini/workflows/CodeQL/badge.svg)
-![Lint Code Base](https://github.com/pythonrising/broccolini/workflows/Lint%20Code%20Base/badge.svg)
-[![codecov](https://codecov.io/gh/pythonrising/broccolini/branch/master/graph/badge.svg)](https://codecov.io/gh/pythonrising/broccolini)
 
 ## Description
 
