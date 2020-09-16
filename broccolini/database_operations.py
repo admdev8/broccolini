@@ -52,3 +52,10 @@ class DataBaseOperationFunctions:
         client = self.get_fauna_connection()
         indexes = client.query(q.paginate(q.indexes()))
         return indexes
+
+    def fauna_write_database(self) -> FaunaClient:
+        """Write to fauna database."""
+        client = self.get_fauna_connection()
+        return client
+        # indexes = client.query(q.paginate(q.indexes()))
+        # return indexes
