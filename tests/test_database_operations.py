@@ -50,15 +50,13 @@ class TestDatabaseOperationsFunctions:
         client_token = TestDatabaseOperationsFunctions.get_test_values(
             return_data_dict["fauna_secret_path"]
         )
-        # need to filter client token to only give the data we need here
         result = DataBaseOperationFunctions(
             client_token=client_token
         ).get_fauna_connection()
         expected = "faunadb.client.FaunaClient"
         expected_type = FaunaClient
-        assert expected in str(result[0])
-        assert isinstance(result[0], expected_type)
-        logging.debug(result)
+        assert expected in str(result)
+        assert isinstance(result, expected_type)
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
@@ -67,8 +65,10 @@ class TestDatabaseOperationsFunctions:
         client_token = TestDatabaseOperationsFunctions.get_test_values(
             return_data_dict["fauna_secret_path"]
         )
-        # logging.debug(client_token)
         result = DataBaseOperationFunctions(
             client_token=client_token
         ).fauna_read_database()
-        logging.debug(result)
+        expected_type = dict
+        expected = []  # currently the database is empty. This will change.
+        assert isinstance(result, expected_type)
+        assert expected == result["data"]
