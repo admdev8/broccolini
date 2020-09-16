@@ -33,12 +33,11 @@ class TestDatabaseOperationsFunctions:
                 vault_token="VAULT_TOKEN",
                 secret_path=secret_path,
             )
-            return fauna_secret_key['data']['data']['_key']
+            return fauna_secret_key["data"]["data"]["_key"]
         except KeyError as _error:
             raise ValueError("Missing environment variables") from _error
 
     @staticmethod
-
     @pytest.mark.dependency(name="test_login_to_fauna")
     def test_get_fauna_connection(return_data_dict):
         """Test login to fauna.
@@ -60,8 +59,6 @@ class TestDatabaseOperationsFunctions:
         assert expected in str(result[0])
         assert isinstance(result[0], expected_type)
         logging.debug(result)
-
-
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])

@@ -56,11 +56,3 @@ class DataBaseOperationFunctions:
         # # return client
         # indexes = client.query(q.paginate(q.indexes()))
         # return indexes
-
-
-
-
-
-
-
-
