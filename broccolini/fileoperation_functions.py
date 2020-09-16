@@ -5,7 +5,7 @@ File operations, eg, open close read write.
 
 import logging
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
 # from broccolini.json_functions import JsonFunctions
 

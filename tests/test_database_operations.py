@@ -6,8 +6,10 @@ Testing common Database operations. Starting with www.faunadb.com.
 """
 
 import logging
+
 import pytest
 from faunadb.client import FaunaClient
+
 from broccolini.authentication_functions import VaultFunctions
 from broccolini.database_operations import DataBaseOperationFunctions
 
@@ -33,7 +35,7 @@ class TestDatabaseOperationsFunctions:
                 vault_token="VAULT_TOKEN",
                 secret_path=secret_path,
             )
-            return fauna_secret_key
+            return fauna_secret_key["data"]["data"]["_key"]
         except KeyError as _error:
             raise ValueError("Missing environment variables") from _error
 
@@ -57,3 +59,18 @@ class TestDatabaseOperationsFunctions:
         expected_type = FaunaClient
         assert expected in str(result)
         assert isinstance(result, expected_type)
+
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_read_database(return_data_dict):
+        """Test login to fauna."""
+        client_token = TestDatabaseOperationsFunctions.get_test_values(
+            return_data_dict["fauna_secret_path"]
+        )
+        result = DataBaseOperationFunctions(
+            client_token=client_token
+        ).fauna_read_database()
+        expected_type = dict
+        expected = []  # currently the database is empty. This will change.
+        assert isinstance(result, expected_type)
+        assert expected == result["data"]

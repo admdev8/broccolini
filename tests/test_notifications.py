@@ -5,10 +5,12 @@
 Testing notifications including twilio.
 """
 import logging
+
 import pytest
 from twilio.rest import Client  # type: ignore
-from broccolini.notifications import TwilioFunctions
+
 from broccolini.authentication_functions import VaultFunctions
+from broccolini.notifications import TwilioFunctions
 
 logging.basicConfig(
     level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
@@ -55,12 +57,7 @@ class TestTwilioFunctions:
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_twilio"])
     def test_send_twilio_notification(return_data_dict):
-        """Test login to twilio.
-
-        input: twilio client
-        output: twilio message side effect and boolean
-        doesn't seem like account sid is needed
-        """
+        """Test send twilio notification."""
         auth_token = TestTwilioFunctions.get_test_values(
             return_data_dict["twilio_path_auth_token"]
         )

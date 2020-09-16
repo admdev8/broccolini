@@ -1,10 +1,10 @@
 # broccolini
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
 Collection of utilities used by other python programs.
-
 
 ## QuickStart
 
@@ -13,6 +13,6 @@ This directory is a collection of utilities helpful for my work process. It is h
 ## Using this repository
 
 pip install broccolini
-git clone https://github.com/pythonrising/broccolini.git
+git clone [https://github.com/pythonrising/broccolini.git]
 run tests
 edit your files

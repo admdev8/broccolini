@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 """Testing authentication functions."""
 import logging
+
 import hvac
 import pytest
+
 from broccolini.authentication_functions import VaultFunctions
 
 logging.basicConfig(
