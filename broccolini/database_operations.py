@@ -6,7 +6,7 @@ import logging
 
 from faunadb import query as q
 from faunadb.client import FaunaClient
-from faunadb.objects import Ref
+# from faunadb.objects import Ref
 from faunadb.errors import BadRequest
 
 
@@ -66,10 +66,7 @@ class DataBaseOperationFunctions:
             return new
 
         except (BadRequest, Exception) as _error:  # pragma: no cover
-            raise ValueError(
-                "Fauna error."
-            ) from _error
-
+            raise ValueError("Fauna error.") from _error
 
             # try:
             #     query = client.query(q.create_database({"name": database}))
