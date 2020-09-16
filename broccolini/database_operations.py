@@ -6,8 +6,8 @@ import logging
 
 from faunadb import query as q
 from faunadb.client import FaunaClient
-
-# from faunadb.objects import Ref
+from faunadb.objects import Ref
+from faunadb.errors import BadRequest
 
 
 logging.basicConfig(
@@ -54,8 +54,27 @@ class DataBaseOperationFunctions:
         return indexes
 
     def fauna_write_database(self) -> FaunaClient:
-        """Write to fauna database."""
+        """Write to fauna database.
+        2020-09-16 00:01:01,436 - DEBUG -
+        {'ref': Ref(id=froglegs01_new, collection=Ref(id=databases)),
+        'ts': 1599661067450000, 'name': 'froglegs01_new', 'global_id': 'yxku95xzgydbg'
+        """
         client = self.get_fauna_connection()
-        return client
-        # indexes = client.query(q.paginate(q.indexes()))
-        # return indexes
+        database = "froglegs01_new"
+        try:
+            new = client.query(q.delete(q.database(database)))
+            return new
+
+        except (BadRequest, Exception) as _error:  # pragma: no cover
+            raise ValueError(
+                "Fauna error."
+            ) from _error
+
+
+            # try:
+            #     query = client.query(q.create_database({"name": database}))
+            #     return query
+            # except:  # pragma: no cover
+        #     #     raise ValueError(f"Can't create database {database}")
+        # except:  # pragma: no cover
+        #     raise ValueError(f"Can't delete database {database}")
