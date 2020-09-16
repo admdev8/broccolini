@@ -44,6 +44,13 @@ jobs:
         run: poetry run pytest --cov . --cov-report=xml
         # pytest --cov=./ --cov-report=xml
 
+      - name: Poetry export requirements.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VAULT_URL: ${{ secrets.VAULT_URL }}
+          VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
+        run: poetry export --format=requirements.txt --without-hashes --dev --output=docs/requirements.txt
+
       - name: Upload pytest test results
         uses: actions/upload-artifact@v1
         with:
