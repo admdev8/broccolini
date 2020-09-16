@@ -47,12 +47,6 @@ class DataBaseOperationFunctions:
 
     def fauna_read_database(self) -> FaunaClient:
         """Read from fauna database."""
-        # start by using client actual password to login and read database
-        # then switch to use client token to login
-        # then create a collection
-        logging.debug(self.client_token)
-        # client = FaunaClient(secret=r'fnAD1wkhl0ACErmrU_-6R9ZX70GBygBHmt53vxdB')
-        # client = FaunaClient(secret=self.client_token)
-        # # return client
-        # indexes = client.query(q.paginate(q.indexes()))
-        # return indexes
+        client = FaunaClient(secret=self.client_token)
+        indexes = client.query(q.paginate(q.indexes()))
+        return indexes
