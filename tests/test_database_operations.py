@@ -86,10 +86,10 @@ class TestDatabaseOperationsFunctions:
     #         client_token=client_token
     #     ).fauna_write_database()
     #     logging.debug(result)
-        # expected_type = dict
-        # expected = []  # currently the database is empty. This will change.
-        # assert isinstance(result, expected_type)
-        # assert expected == result["data"]
+    # expected_type = dict
+    # expected = []  # currently the database is empty. This will change.
+    # assert isinstance(result, expected_type)
+    # assert expected == result["data"]
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])

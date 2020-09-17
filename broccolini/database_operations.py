@@ -7,6 +7,7 @@ import shortuuid
 
 from faunadb import query as q
 from faunadb.client import FaunaClient
+
 # from faunadb.errors import FaunaError, BadRequest
 
 # from faunadb.objects import Ref
