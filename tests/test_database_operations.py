@@ -63,7 +63,7 @@ class TestDatabaseOperationsFunctions:
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
     def test_fauna_read_database(return_data_dict):
-        """Test login to fauna."""
+        """Test Fauna DB read."""
         client_token = TestDatabaseOperationsFunctions.get_test_values(
             return_data_dict["fauna_secret_path"]
         )
@@ -74,3 +74,35 @@ class TestDatabaseOperationsFunctions:
         expected = []  # currently the database is empty. This will change.
         assert isinstance(result, expected_type)
         assert expected == result["data"]
+
+    # @staticmethod
+    # @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    # def test_fauna_write_database(return_data_dict):
+    #     """Test Fauna DB write."""
+    #     client_token = TestDatabaseOperationsFunctions.get_test_values(
+    #         return_data_dict["fauna_secret_path"]
+    #     )
+    #     result = DataBaseOperationFunctions(
+    #         client_token=client_token
+    #     ).fauna_write_database()
+    #     logging.debug(result)
+    # expected_type = dict
+    # expected = []  # currently the database is empty. This will change.
+    # assert isinstance(result, expected_type)
+    # assert expected == result["data"]
+
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_create_database(return_data_dict):
+        """Test Fauna DB create."""
+        client_token = TestDatabaseOperationsFunctions.get_test_values(
+            return_data_dict["fauna_secret_path"]
+        )
+        result = DataBaseOperationFunctions(
+            client_token=client_token
+        ).fauna_create_database()
+        expected_type = tuple
+        expected = "test_db_"
+        assert isinstance(result, expected_type)
+        assert expected in result[2]
+        logging.debug(result[2])
