@@ -5,6 +5,7 @@ DataBase operations.
 import logging
 import shortuuid
 
+from typing import Tuple, Any
 from faunadb import query as q
 from faunadb.client import FaunaClient
 
@@ -35,6 +36,7 @@ class DataBaseOperationFunctions:
         class_name = self.__class__.__name__
         return f"{class_name}"
 
+    # def get_fauna_connection(self) -> FaunaClient:
     def get_fauna_connection(self) -> FaunaClient:
         """Get Fauna Connection.
 
@@ -55,10 +57,7 @@ class DataBaseOperationFunctions:
         indexes = client.query(q.paginate(q.indexes()))
         return indexes
 
-    def fafd(self):
-        """[summary]"""
-
-    def fauna_create_database(self) -> bool:
+    def fauna_create_database(self) -> Tuple[bool, Any, str]:
         """Create database.
 
         create random database with shortuuid to ensure randomness

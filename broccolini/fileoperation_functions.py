@@ -42,7 +42,7 @@ class FileOperationFunctions:
             modification date - from pathlib
         """
         input_path: Path = kwargs["input_path"]
-        output_dict = dict(
+        output_dict: Dict[str, object] = dict(
             folders_and_files=list(input_path.rglob("*.*")),
         )
         return output_dict
