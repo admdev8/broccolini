@@ -9,9 +9,7 @@ from typing import Any, Dict, Tuple
 import hvac
 from hvac.v1 import Client
 
-logging.basicConfig(
-    level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
 class VaultFunctions:
@@ -58,15 +56,11 @@ class VaultFunctions:
             _vault_url: str = kwargs["vault_url"]
             _vault_token: str = kwargs["vault_token"]
             _secret_path: str = kwargs["secret_path"]
-            client = self.get_vault_credentials(
-                vault_url=_vault_url, vault_token=_vault_token
-            )
+            client = self.get_vault_credentials(vault_url=_vault_url, vault_token=_vault_token)
             read_response = client.secrets.kv.v2.read_secret_version(path=_secret_path)
             return read_response
         except (hvac.exceptions.Forbidden) as _error:  # pragma: no cover
-            raise ValueError(
-                "Permission Denied, please check your permissions and the path to the secret"
-            ) from _error
+            raise ValueError("Permission Denied, please check your permissions and the path to the secret") from _error
 
     def add_to_vault(self, **kwargs: str) -> Tuple[bool, str]:
         """Add to vault data.
@@ -83,17 +77,11 @@ class VaultFunctions:
             _vault_token: str = kwargs["vault_token"]
             _secret_path: str = kwargs["secret_path"]
             _secret: str = kwargs["secret"]
-            client = self.get_vault_credentials(
-                vault_url=_vault_url, vault_token=_vault_token
-            )
-            result = client.secrets.kv.v2.create_or_update_secret(
-                path=_secret_path, secret=_secret
-            )
+            client = self.get_vault_credentials(vault_url=_vault_url, vault_token=_vault_token)
+            result = client.secrets.kv.v2.create_or_update_secret(path=_secret_path, secret=_secret)
             return True, result
         except (hvac.exceptions.Forbidden) as _error:  # pragma: no cover
-            raise ValueError(
-                "Permission Denied, please check your permissions and the path to the secret!"
-            ) from _error
+            raise ValueError("Permission Denied, please check your permissions and the path to the secret!") from _error
 
     def initialized_vault(self, **kwargs: str) -> bool:
         """Confirm vault is initialized.
@@ -105,9 +93,7 @@ class VaultFunctions:
         try:
             _vault_url: str = kwargs["vault_url"]
             _vault_token: str = kwargs["vault_token"]
-            client = self.get_vault_credentials(
-                vault_url=_vault_url, vault_token=_vault_token
-            )
+            client = self.get_vault_credentials(vault_url=_vault_url, vault_token=_vault_token)
             if not client.sys.is_initialized():  # pragma: no cover
                 return False  # pragma: no cover
             return True

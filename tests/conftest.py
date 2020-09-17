@@ -102,29 +102,14 @@ def create_list_of_filenames_and_directories(tmpdir_factory):
     folder_list = ["python", "javascript", "network", "ml_ai"]
     sub_directory_name_list = ["subdir_1", "subdir_2", "subdir_3"]
     folder_type = random.choice(folder_list)
-    full_path = (
-        base_file_name
-        + folder_type
-        + "/"
-        + fake.file_name(extension="txt", category="office")
-    )
+    full_path = base_file_name + folder_type + "/" + fake.file_name(extension="txt", category="office")
     file_path_and_name_list = []
     for _ in range(5):
         folder_type = random.choice(folder_list)
         subdirectory = random.choice(sub_directory_name_list)
-        full_path = (
-            base_file_name
-            + folder_type
-            + "/"
-            + fake.file_name(extension="txt", category="office")
-        )
+        full_path = base_file_name + folder_type + "/" + fake.file_name(extension="txt", category="office")
         full_path_subdir = (
-            base_file_name
-            + folder_type
-            + "/"
-            + subdirectory
-            + "/"
-            + fake.file_name(extension="txt", category="office")
+            base_file_name + folder_type + "/" + subdirectory + "/" + fake.file_name(extension="txt", category="office")
         )
         file_path_and_name_list.append(full_path)
         file_path_and_name_list.append(full_path_subdir)

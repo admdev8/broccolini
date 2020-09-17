@@ -8,9 +8,7 @@ import pytest
 
 from broccolini.authentication_functions import VaultFunctions
 
-logging.basicConfig(
-    level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
 class TestVaultFunctions:
@@ -24,9 +22,7 @@ class TestVaultFunctions:
         input : vault settings
         output: vault client connection
         """
-        result = VaultFunctions.get_vault_credentials(
-            vault_url="VAULT_URL", vault_token="VAULT_TOKEN"
-        )
+        result = VaultFunctions.get_vault_credentials(vault_url="VAULT_URL", vault_token="VAULT_TOKEN")
         expected = "hvac.v1.Client object at 0"
         expected_type = hvac.v1.Client
         assert isinstance(result, expected_type)
@@ -42,9 +38,7 @@ class TestVaultFunctions:
         """
         message = "Missing environment variables"
         with pytest.raises(ValueError, match=message):
-            VaultFunctions.get_vault_credentials(
-                vault_url="VAULT_URL_BAD", vault_token="VAULT_TOKEN_BAD"
-            )
+            VaultFunctions.get_vault_credentials(vault_url="VAULT_URL_BAD", vault_token="VAULT_TOKEN_BAD")
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_vault"])

@@ -14,9 +14,7 @@ from faker import Faker
 
 from broccolini.fileoperation_functions import FileOperationFunctions
 
-logging.basicConfig(
-    level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
 class TestFileOperationsFunctions:

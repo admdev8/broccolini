@@ -7,9 +7,7 @@ import logging
 from twilio.base.exceptions import TwilioException, TwilioRestException
 from twilio.rest import Client
 
-logging.basicConfig(
-    level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
 class TwilioFunctions:
@@ -75,6 +73,4 @@ class TwilioFunctions:
             )
             return f"successful message_sid:{message.sid}:"
         except (TwilioException, TwilioRestException) as _error:  # pragma: no cover
-            raise ValueError(
-                "Permission Denied, please check your permissions and the path to the secret!"
-            ) from _error
+            raise ValueError("Permission Denied, please check your permissions and the path to the secret!") from _error

@@ -14,9 +14,7 @@ from faunadb.client import FaunaClient
 # from faunadb.errors import BadRequest
 
 
-logging.basicConfig(
-    level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
 class DataBaseOperationFunctions:

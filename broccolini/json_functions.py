@@ -7,9 +7,7 @@ import json
 import logging
 from typing import Dict, Tuple
 
-logging.basicConfig(
-    level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
 class JsonFunctions:

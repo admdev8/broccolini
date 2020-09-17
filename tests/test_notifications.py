@@ -12,9 +12,7 @@ from twilio.rest import Client  # type: ignore
 from broccolini.authentication_functions import VaultFunctions
 from broccolini.notifications import TwilioFunctions
 
-logging.basicConfig(
-    level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
 class TestTwilioFunctions:
@@ -44,12 +42,8 @@ class TestTwilioFunctions:
         twilio_path_auth_token="greg_production/twilio_data/TWILIO_AUTH_TOKEN",
         output: twilio client
         """
-        account_sid = TestTwilioFunctions.get_test_values(
-            return_data_dict["twilio_account_sid"]
-        )
-        auth_token = TestTwilioFunctions.get_test_values(
-            return_data_dict["twilio_path_auth_token"]
-        )
+        account_sid = TestTwilioFunctions.get_test_values(return_data_dict["twilio_account_sid"])
+        auth_token = TestTwilioFunctions.get_test_values(return_data_dict["twilio_path_auth_token"])
         result = TwilioFunctions(account_sid, auth_token).get_twilio_connection()
         expected_type = Client
         assert isinstance(result, expected_type)
@@ -58,18 +52,10 @@ class TestTwilioFunctions:
     @pytest.mark.dependency(depends=["test_login_to_twilio"])
     def test_send_twilio_notification(return_data_dict):
         """Test send twilio notification."""
-        auth_token = TestTwilioFunctions.get_test_values(
-            return_data_dict["twilio_path_auth_token"]
-        )
-        twilio_phone_number = TestTwilioFunctions.get_test_values(
-            return_data_dict["twilio_phone_number"]
-        )
-        account_sid = TestTwilioFunctions.get_test_values(
-            return_data_dict["twilio_account_sid"]
-        )
-        twilio_notification_number = TestTwilioFunctions.get_test_values(
-            return_data_dict["twilio_notification_number"]
-        )
+        auth_token = TestTwilioFunctions.get_test_values(return_data_dict["twilio_path_auth_token"])
+        twilio_phone_number = TestTwilioFunctions.get_test_values(return_data_dict["twilio_phone_number"])
+        account_sid = TestTwilioFunctions.get_test_values(return_data_dict["twilio_account_sid"])
+        twilio_notification_number = TestTwilioFunctions.get_test_values(return_data_dict["twilio_notification_number"])
         this = TwilioFunctions(account_sid, auth_token)
         result = this.send_twilio_notification(
             written_directories=return_data_dict["written_directories"],
