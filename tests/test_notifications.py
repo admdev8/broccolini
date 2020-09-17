@@ -7,7 +7,7 @@ Testing notifications including twilio.
 import logging
 
 import pytest
-from twilio.rest import Client  # type: ignore
+from twilio.rest import Client
 
 from broccolini.authentication_functions import VaultFunctions
 from broccolini.notifications import TwilioFunctions
