@@ -4,21 +4,23 @@ version = "0.1.0"
 description = "broccolini utility functions"
 authors = ["gregorywendel <greg.wendel@hey.com>"]
 license = "MIT"
+readme = "README.md"
 homepage = "https://github.com/clearabundantfutbol/ipv6_python_utilities"
 repository = "https://github.com/clearabundantfutbol/ipv6_python_utilities"
 keywords = ["utilities"]
-classifiers = [
-    "Environment :: Console",
-    "Operating System :: OS Independent",
-    "Topic :: Software Development :: Documentation",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Software Development :: Quality Assurance",
+include = ["LICENSE"]
+classifiers=[
+   "Environment :: Console",
+   "Programming Language :: Python :: 3",
+   "License :: OSI Approved :: MIT",
+   "Operating System :: OS Independent",
+   "Environment :: Console",
+   "Intended Audience :: Developers",
+   "Natural Language :: English",
+   "Topic :: Software Development :: Libraries :: Python Modules",
+   "Topic :: Software Development :: Documentation",
+   "Topic :: Software Development :: Quality Assurance",
 ]
-include = [
-    "LICENSE",
-]
-
-readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
