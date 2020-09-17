@@ -68,9 +68,7 @@ class FileOperationFunctions:
         output_listing: List[Dict[str, object]] = []
         for each in folder_list:
             # logging.debug(type(each))
-            write_to_json: Dict[str, object] = FileOperationFunctions.build_dictionary(
-                input_path=each
-            )
+            write_to_json: Dict[str, object] = FileOperationFunctions.build_dictionary(input_path=each)
             # sending a path not a list
             logging.debug(each)
             logging.debug("\n")
