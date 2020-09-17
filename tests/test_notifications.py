@@ -23,7 +23,9 @@ class TestTwilioFunctions:
         """Build values needed for the test."""
         try:
             twilio_path_auth_token_key = VaultFunctions().query_vault_data(
-                vault_url="VAULT_URL", vault_token="VAULT_TOKEN", secret_path=secret_path,
+                vault_url="VAULT_URL",
+                vault_token="VAULT_TOKEN",
+                secret_path=secret_path,
             )
             auth_token = twilio_path_auth_token_key["data"]["data"]["_key"]
             return auth_token
