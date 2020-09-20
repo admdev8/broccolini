@@ -29,6 +29,8 @@ def return_data_dict():
         output_file_name=r"./tests/__output_files/output_json_files.json",
         input_directory_path=r"",
         fauna_test_database=r"froglegs01_new",
+        fauna_test_collection_name=r"collection_from_conftest",
+        fauna_test_test_data=r"string formatted test data from conftest",
     )
     return input_dict
 

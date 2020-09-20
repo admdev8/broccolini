@@ -80,9 +80,14 @@ class DataBaseOperationFunctions:
         output_value: success
         output_type: bool
         """
-        # client = self.get_fauna_connection()
-        database = kwargs["database"]
+        client = self.get_fauna_connection()
+        database: str = kwargs["database"]
+        collection_name=kwargs["collection_name"]
+        data_to_add=kwargs["data_to_add"]
         logging.debug(database)
+        logging.debug(collection_name)
+        logging.debug(client)
+        logging.debug(data_to_add)
         try:
             # add collections
             # query = client.query(q.
@@ -90,33 +95,3 @@ class DataBaseOperationFunctions:
             return True
         except (Exception) as _error:  # pragma: no cover
             raise ValueError("Unable to write to database.") from _error
-        # return True
-
-
-# database = f"test_db_{shortuuid.uuid()}"
-# fauna_add_to_database
-# def fauna_write_database(self) -> FaunaClient:
-#     """Write to fauna database.
-#     2020-09-16 00:01:01,436 - DEBUG -
-#     {'ref': Ref(id=froglegs01_new, collection=Ref(id=databases)),
-#     'ts': 1599661067450000, 'name': 'froglegs01_new', 'global_id': 'yxku95xzgydbg'
-#     """
-#     client = self.get_fauna_connection()
-#     database = "froglegs01_new"
-
-#     # return query
-#     try:
-#         # query = client.query(q.create_database({"name": database}))
-#         # delete it if it exists
-#         client.query(q.delete(q.database(database)))
-#         # if it deletes then recreate it
-#         # if it doesn't exist then don't try and delete it or return
-#         # create it now
-#         query = client.query(q.create_database({"name": database}))
-#         # try:
-#     #         query = client.query(q.create_database({"name": database}))
-#     #         return query
-#     #     except (BadRequest, FaunaError, Exception) as _error:  # pragma: no cover
-#     #         raise ValueError("Fauna error.") from _error
-#     except (BadRequest, Exception) as _error:  # pragma: no cover
-#         raise ValueError("Unable to delete database.") from _error
