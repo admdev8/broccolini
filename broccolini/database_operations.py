@@ -3,12 +3,10 @@
 DataBase operations.
 """
 import logging
-from typing import Tuple, Any
+from typing import List, Dict, Tuple, Any
 import shortuuid
 from faunadb import query as q
 from faunadb.client import FaunaClient
-
-# from faunadb.errors import FaunaError, BadRequest
 
 # from faunadb.objects import Ref
 # from faunadb.errors import BadRequest
@@ -17,7 +15,7 @@ from faunadb.client import FaunaClient
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
-class DataBaseOperationFunctions:
+class DataBaseOperations:
     """DataBase Operation Functions.
 
     Authentication and secrets from Hashicorp Vault.
@@ -50,12 +48,6 @@ class DataBaseOperationFunctions:
         except Exception as _errorinfo:  # pragma: no cover
             raise ValueError("error connecting") from _errorinfo
 
-    def fauna_read_database(self) -> FaunaClient:
-        """Read from fauna database."""
-        client = self.get_fauna_connection()
-        indexes = client.query(q.paginate(q.indexes()))
-        return indexes
-
     def fauna_create_database(self) -> Tuple[bool, Any, str]:
         """Create database.
 
@@ -71,28 +63,23 @@ class DataBaseOperationFunctions:
         except (Exception) as _error:  # pragma: no cover
             raise ValueError("Unable to create database.") from _error
 
-    # def fauna_write_database(self) -> FaunaClient:
-    #     """Write to fauna database.
-    #     2020-09-16 00:01:01,436 - DEBUG -
-    #     {'ref': Ref(id=froglegs01_new, collection=Ref(id=databases)),
-    #     'ts': 1599661067450000, 'name': 'froglegs01_new', 'global_id': 'yxku95xzgydbg'
-    #     """
-    #     client = self.get_fauna_connection()
-    #     database = "froglegs01_new"
+    def fauna_read_database(self) -> Dict[List[str], Any]:
+        """Read from fauna database."""
+        try:
+            client = self.get_fauna_connection()
+            indexes = client.query(q.paginate(q.indexes()))
+            return indexes
+        except (Exception) as _error:  # pragma: no cover
+            raise ValueError("Fauna error - read database.") from _error
 
-    #     # return query
-    #     try:
-    #         # query = client.query(q.create_database({"name": database}))
-    #         # delete it if it exists
-    #         client.query(q.delete(q.database(database)))
-    #         # if it deletes then recreate it
-    #         # if it doesn't exist then don't try and delete it or return
-    #         # create it now
-    #         query = client.query(q.create_database({"name": database}))
-    #         # try:
-    #     #         query = client.query(q.create_database({"name": database}))
-    #     #         return query
-    #     #     except (BadRequest, FaunaError, Exception) as _error:  # pragma: no cover
-    #     #         raise ValueError("Fauna error.") from _error
-    #     except (BadRequest, Exception) as _error:  # pragma: no cover
-    #         raise ValueError("Unable to delete database.") from _error
+    def fauna_paginate_collection(self, **kwargs: str) -> Tuple[str, str]:
+        """Paginate collection."""
+        client = self.get_fauna_connection()
+        database: str = kwargs["database"]
+        collection_name: str = kwargs["collection_name"]
+        return database, collection_name, client
+        # try:
+        #     indexes = client.query(q.paginate(q.indexes()))
+        #     return indexes
+        # except (Exception) as _error:  # pragma: no cover
+        #     raise ValueError("Fauna error - read database.") from _error
