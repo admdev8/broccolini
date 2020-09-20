@@ -45,7 +45,7 @@ class TestDatabaseOperations:
         output_type: FaunaClient
         output example: <faunadb.client.FaunaClient object at 0x000002439xxxxx>
         """
-        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_admin"])
         result = DataBaseOperations(client_token=client_token).get_fauna_connection()
         expected = "faunadb.client.FaunaClient"
         expected_type = FaunaClient
@@ -57,7 +57,7 @@ class TestDatabaseOperations:
     def test_fauna_create_database(return_data_dict, return_random_uuid):
         """Test Fauna DB create."""
         database = f"database_{return_random_uuid}"
-        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_admin"])
         result = DataBaseOperations(client_token=client_token).fauna_create_database(
             database=database,
         )
@@ -72,10 +72,10 @@ class TestDatabaseOperations:
         """Test Fauna DB read."""
         client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_server"])
         logging.debug(client_token)
-        # result = DataBaseOperations(client_token=client_token).fauna_read_database()
-        # expected_type = dict
+        result = DataBaseOperations(client_token=client_token).fauna_read_database()
+        expected_type = dict
         # expected = "TrainingMaterialsByCompletedFlag"
-        # assert isinstance(result, expected_type)
+        assert isinstance(result, expected_type)
         # assert expected in str(result["data"])
         # logging.debug(result)
 
@@ -113,7 +113,7 @@ class TestDatabaseOperations:
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
     def test_fauna_delete_database(return_data_dict, return_random_uuid):
         """Test Fauna DB delete database."""
-        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_admin"])
         database = f"database_{return_random_uuid}"
         result = DataBaseOperations(client_token=client_token).fauna_delete_database(
             database=database,
@@ -127,7 +127,7 @@ class TestDatabaseOperations:
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
     def test_fauna_delete_database_exception(return_data_dict):
         """Test Fauna DB delete database exception."""
-        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_admin"])
         with pytest.raises(ValueError):
             DataBaseOperations(client_token=client_token).fauna_delete_database(
                 database=return_data_dict["fauna_test_bad_database"],
@@ -137,9 +137,9 @@ class TestDatabaseOperations:
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
     def test_fauna_paginate_database(return_data_dict):
         """Test Fauna paginate database."""
-        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_admin"])
         result = DataBaseOperations(client_token=client_token).fauna_paginate_database()
-        # logging.debug(result['data'])
+        logging.debug(result["data"])
         # import pprint as pp
         # pp.pprint(result['data'])
         # dict of dict with data that has a list of links
