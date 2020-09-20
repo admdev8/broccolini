@@ -52,5 +52,3 @@ jobs:
           VALIDATE_ANSIBLE: false
           DEFAULT_BRANCH: master
           FILTER_REGEX_EXCLUDE: poetry.lock
-          OUTPUT_FOLDER: my.build
-          OUTPUT_DETAILS: detailed
