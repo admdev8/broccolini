@@ -15,7 +15,7 @@ from faunadb.client import FaunaClient
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
-class DataBaseOperationFunctions:
+class DataBaseOperations:
     """DataBase Operation Functions.
 
     Authentication and secrets from Hashicorp Vault.
