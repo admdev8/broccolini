@@ -92,17 +92,18 @@ class TestDatabaseOperationsFunctions:
     # assert isinstance(result, expected_type)
     # assert expected == result["data"]
 
-    # @staticmethod
-    # @pytest.mark.dependency(depends=["test_login_to_fauna"])
-    # def test_fauna_add_to_database(return_data_dict):
-    #     """Test Fauna DB add."""
-    #     client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path"])
-    #     database = DataBaseOperationFunctions(client_token=client_token).fauna_create_database()
-    #     result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
-    #         database=database[2],
-    #         collection_name=return_data_dict["fauna_test_collection_name"],
-    #         data_to_add=return_data_dict["fauna_test_test_data"],
-    #     )
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_add_to_database(return_data_dict):
+        """Test Fauna DB add.
+        #
+        """
+        client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path"])
+        database = DataBaseOperationFunctions(client_token=client_token).fauna_create_database()
+        result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
+            database=database[2],
+            data_to_add=return_data_dict["fauna_test_test_data"],
+        )
     #     expected_type = bool
     #     assert isinstance(result, expected_type)
     #     logging.debug(result)
