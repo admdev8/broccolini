@@ -77,9 +77,10 @@ class TestDatabaseOperationsFunctions:
             collection_name=return_data_dict["fauna_collection_name_track_training"],
         )
         expected_type = dict
+        expected = 'TrainingMaterialsByCompletedFlag'
         assert isinstance(result, expected_type)
-        # expected_type = dict
-        # expected = []  # currently the database is empty. This will change.
+        assert expected in str(result['data'])
+        logging.debug(result)
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
