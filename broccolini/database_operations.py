@@ -3,7 +3,7 @@
 DataBase operations.
 """
 import logging
-from typing import Tuple, Any
+from typing import List, Dict, Tuple, Any
 import shortuuid
 from faunadb import query as q
 from faunadb.client import FaunaClient
@@ -48,16 +48,6 @@ class DataBaseOperationFunctions:
         except Exception as _errorinfo:  # pragma: no cover
             raise ValueError("error connecting") from _errorinfo
 
-    def fauna_read_database(self, **kwargs: str) -> Tuple[str, str]:
-        """Read from fauna database."""
-        client = self.get_fauna_connection()
-        database: str = kwargs["database"]
-        collection_name: str = kwargs["collection_name"]
-        return database, collection_name
-
-        # adminClient.query(q.get(q.database("annuvin")))
-        # indexes = client.query(q.paginate(q.indexes()))
-        # return indexes
 
     def fauna_create_database(self) -> Tuple[bool, Any, str]:
         """Create database.
@@ -74,51 +64,25 @@ class DataBaseOperationFunctions:
         except (Exception) as _error:  # pragma: no cover
             raise ValueError("Unable to create database.") from _error
 
-    # def send_twilio_notification(self, **kwargs: str) -> str:
-    # def fauna_add_to_database(self, **kwargs: str) -> bool:
-    #     """Add to the database.
+    def fauna_read_database(self, **kwargs: str) -> Dict[List[str], Any]:
+        """Read from fauna database."""
+        client = self.get_fauna_connection()
+        database: str = kwargs["database"]
+        # collection_name: str = kwargs["collection_name"]
+        try:
+            indexes = client.query(q.paginate(q.indexes()))
+            return indexes
+        except (Exception) as _error:  # pragma: no cover
+            raise ValueError("Fauna error - read database.") from _error
 
-    #     write data to random database created in other method
-    #     returns
-    #     output_value: success
-    #     output_type: bool
-    #     minimum we need is a collection then an index then a record
-    #     this record will come from the file data generated elsewhere
-    #     """
-    #     client = self.get_fauna_connection()
-    #     # database: str = kwargs["database"]
-    #     database_name_temp: str = 'satnightdb'
-    #     collection_name = kwargs["collection_name"]
-    #     data_to_add = kwargs["data_to_add"]
-    #     # need to get database ref id correct it is currently using "collection=Ref(id=databases)"
-    #     # instead of the correct name
-    #     try:
-    #         # query = client.query(q.get(q.database(database)))
-    #         # query = client.query(q.create_database({"name": database_name_temp}))
-    #         query = client.query(q.get(q.database(database_name_temp)))
-    #         try:
-    #             # collection_name_generated = client.query(q.collection(collection_name))
-    #             # collection_name_generated = client.query(q.create_collection({"name": collection_name}))
-    #             # collection_name_generated = client.query(q.create_collection({"name": "collectionmanual1"}))
-    #             query = client.query(q.get(q.database(database_name_temp)))
-    #             fauna_client.query2(q.create_collection({"name": collection_name}))
-    #             # ient.query(q.create_collection({"name": "posts"}))
-    #             # logging.debug(collection_name_generated)
-    #             # logging.debug(database)
-    #             logging.debug(data_to_add)
-    #             return True
-
-    #         except BadRequest as _error:  # pragma: no cover
-    #             raise ValueError("Fauna error collection create.") from _error
-    #     except (Exception) as _error:  # pragma: no cover
-    #         raise ValueError("Fauna error.") from _error
-
-
-# serverClient.query(
-#   q.create_index(
-#     {
-#       "name": "posts_by_title",
-#       "source": q.collection("posts"),
-#       "terms": [{"field": ["data", "title"]}]
-#     }
-#   ))
+    def fauna_paginate_collection(self, **kwargs: str) -> Tuple[str, str]:
+        """Paginate collection."""
+        client = self.get_fauna_connection()
+        database: str = kwargs["database"]
+        collection_name: str = kwargs["collection_name"]
+        return database, collection_name
+        # try:
+        #     indexes = client.query(q.paginate(q.indexes()))
+        #     return indexes
+        # except (Exception) as _error:  # pragma: no cover
+        #     raise ValueError("Fauna error - read database.") from _error

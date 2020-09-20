@@ -76,10 +76,27 @@ class TestDatabaseOperationsFunctions:
             database=return_data_dict["fauna_test_database_track_training"],
             collection_name=return_data_dict["fauna_collection_name_track_training"],
         )
-        expected_type = tuple
+        expected_type = dict
         assert isinstance(result, expected_type)
         # expected_type = dict
         # expected = []  # currently the database is empty. This will change.
+
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_paginate_collection(return_data_dict):
+        """Test Fauna DB read."""
+        client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path_track_training"])
+        #     result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
+        #         database=database[2],
+        result = DataBaseOperationFunctions(client_token=client_token).fauna_paginate_collection(
+            database=return_data_dict["fauna_test_database_track_training"],
+            collection_name=return_data_dict["fauna_collection_name_track_training"],
+        )
+        expected_type = tuple
+        assert isinstance(result, expected_type)
+
+
+    #
 
         # assert expected == result["data"]
 
