@@ -7,6 +7,7 @@ from typing import Tuple, Any
 import shortuuid
 from faunadb import query as q
 from faunadb.client import FaunaClient
+
 # from faunadb.objects import Ref
 # from faunadb.errors import BadRequest
 

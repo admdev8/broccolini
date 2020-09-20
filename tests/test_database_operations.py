@@ -107,5 +107,5 @@ class TestDatabaseOperationsFunctions:
     #     assert isinstance(result, expected_type)
     #     logging.debug(result)
 
-        # curl -H 'Authorization: Bearer <FAUNA_SECRET>' https://{hostname}/import?mode=override --data-binary "@path/to/schema.gql"
-        # Authorization: Bearer fnADMxRzydATDKibGAciQlNQWBs-HJdpJS1vJaIM
+    # curl -H 'Authorization: Bearer <FAUNA_SECRET>' https://{hostname}/import?mode=override --data-binary "@path/to/schema.gql"
+    # Authorization: Bearer fnADMxRzydATDKibGAciQlNQWBs-HJdpJS1vJaIM
