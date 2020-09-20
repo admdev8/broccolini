@@ -82,8 +82,8 @@ class DataBaseOperationFunctions:
         """
         client = self.get_fauna_connection()
         database: str = kwargs["database"]
-        collection_name=kwargs["collection_name"]
-        data_to_add=kwargs["data_to_add"]
+        collection_name = kwargs["collection_name"]
+        data_to_add = kwargs["data_to_add"]
         logging.debug(database)
         logging.debug(collection_name)
         logging.debug(client)
