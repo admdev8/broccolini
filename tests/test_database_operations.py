@@ -77,9 +77,9 @@ class TestDatabaseOperationsFunctions:
         #     collection_name=return_data_dict["fauna_collection_name_track_training"],
         # )
         expected_type = dict
-        expected = 'TrainingMaterialsByCompletedFlag'
+        expected = "TrainingMaterialsByCompletedFlag"
         assert isinstance(result, expected_type)
-        assert expected in str(result['data'])
+        assert expected in str(result["data"])
         logging.debug(result)
 
     @staticmethod
