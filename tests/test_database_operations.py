@@ -69,12 +69,21 @@ class TestDatabaseOperationsFunctions:
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
     def test_fauna_read_database(return_data_dict):
         """Test Fauna DB read."""
-        client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path"])
-        result = DataBaseOperationFunctions(client_token=client_token).fauna_read_database()
-        expected_type = dict
-        expected = []  # currently the database is empty. This will change.
+        client_token = TestDatabaseOperationsFunctions.get_test_values(
+            return_data_dict["fauna_secret_path_track_training"]
+        )
+    #     result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
+    #         database=database[2],
+        result = DataBaseOperationFunctions(client_token=client_token).fauna_read_database(
+            database=return_data_dict["fauna_test_database_track_training"],
+            collection_name=return_data_dict["fauna_collection_name_track_training"],
+        )
+        expected_type = tuple
         assert isinstance(result, expected_type)
-        assert expected == result["data"]
+        # expected_type = dict
+        # expected = []  # currently the database is empty. This will change.
+
+        # assert expected == result["data"]
 
     # @staticmethod
     # @pytest.mark.dependency(depends=["test_login_to_fauna"])
@@ -92,22 +101,26 @@ class TestDatabaseOperationsFunctions:
     # assert isinstance(result, expected_type)
     # assert expected == result["data"]
 
-    @staticmethod
-    @pytest.mark.dependency(depends=["test_login_to_fauna"])
-    def test_fauna_add_to_database(return_data_dict):
-        """Test Fauna DB add.
-        #
-        """
-        client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path"])
-        database = DataBaseOperationFunctions(client_token=client_token).fauna_create_database()
-        result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
-            database=database[2],
-            data_to_add=return_data_dict["fauna_test_test_data"],
-        )
-
-    #     expected_type = bool
-    #     assert isinstance(result, expected_type)
+    # @staticmethod
+    # @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    # def test_fauna_add_to_database(return_data_dict):
+    #     """Test Fauna DB add.
+    #     # use same database but call graphql instead
+    #     # uses this for authentication
+    #     # curl -H 'Authorization: Bearer <FAUNA_SECRET>' https://{hostname}/import?mode=override --data-binary
+    #     # "@path/to/schema.gql"
+    #     """
+    #     client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path"])
+    #     database = DataBaseOperationFunctions(client_token=client_token).fauna_create_database()
+    #     result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
+    #         database=database[2],
+    #         data_to_add=return_data_dict["fauna_test_test_data"],
+    #     )
     #     logging.debug(result)
 
-    # curl -H 'Authorization: Bearer <FAUNA_SECRET>' https://{hostname}/import?mode=override --data-binary "@path/to/schema.gql"
-    # Authorization: Bearer fnADMxRzydATDKibGAciQlNQWBs-HJdpJS1vJaIM
+    # #     expected_type = bool
+    # #     assert isinstance(result, expected_type)
+
+
+    # # curl -H 'Authorization: Bearer <FAUNA_SECRET>' https://{hostname}/import?mode=override --data-binary "@path/to/schema.gql"
+    # # Authorization: Bearer fnADMxRzydATDKibGAciQlNQWBs-HJdpJS1vJaIM

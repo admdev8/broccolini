@@ -48,11 +48,16 @@ class DataBaseOperationFunctions:
         except Exception as _errorinfo:  # pragma: no cover
             raise ValueError("error connecting") from _errorinfo
 
-    def fauna_read_database(self) -> FaunaClient:
+    def fauna_read_database(self, **kwargs: str) -> Tuple[str, str]:
         """Read from fauna database."""
         client = self.get_fauna_connection()
-        indexes = client.query(q.paginate(q.indexes()))
-        return indexes
+        database: str = kwargs["database"]
+        collection_name: str = kwargs["collection_name"]
+        return database, collection_name
+
+        # adminClient.query(q.get(q.database("annuvin")))
+        # indexes = client.query(q.paginate(q.indexes()))
+        # return indexes
 
     def fauna_create_database(self) -> Tuple[bool, Any, str]:
         """Create database.

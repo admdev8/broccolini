@@ -48,7 +48,6 @@ jobs:
         uses: docker://github/super-linter:v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OUTPUT_FOLDER: /github_actions_output-folder
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
           FILTER_REGEX_EXCLUDE: poetry.lock
