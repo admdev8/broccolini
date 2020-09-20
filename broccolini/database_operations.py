@@ -48,7 +48,6 @@ class DataBaseOperationFunctions:
         except Exception as _errorinfo:  # pragma: no cover
             raise ValueError("error connecting") from _errorinfo
 
-
     def fauna_create_database(self) -> Tuple[bool, Any, str]:
         """Create database.
 

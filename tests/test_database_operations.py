@@ -95,10 +95,9 @@ class TestDatabaseOperationsFunctions:
         expected_type = tuple
         assert isinstance(result, expected_type)
 
-
     #
 
-        # assert expected == result["data"]
+    # assert expected == result["data"]
 
     # @staticmethod
     # @pytest.mark.dependency(depends=["test_login_to_fauna"])
