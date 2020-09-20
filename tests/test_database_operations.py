@@ -104,6 +104,7 @@ class TestDatabaseOperationsFunctions:
             database=database[2],
             data_to_add=return_data_dict["fauna_test_test_data"],
         )
+
     #     expected_type = bool
     #     assert isinstance(result, expected_type)
     #     logging.debug(result)
