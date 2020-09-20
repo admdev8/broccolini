@@ -7,9 +7,6 @@ from typing import Tuple, Any
 import shortuuid
 from faunadb import query as q
 from faunadb.client import FaunaClient
-
-# from faunadb.errors import FaunaError, BadRequest
-
 # from faunadb.objects import Ref
 # from faunadb.errors import BadRequest
 
@@ -72,26 +69,50 @@ class DataBaseOperationFunctions:
             raise ValueError("Unable to create database.") from _error
 
     # def send_twilio_notification(self, **kwargs: str) -> str:
-    def fauna_add_to_database(self, **kwargs: str) -> bool:
-        """Add to the database.
+    # def fauna_add_to_database(self, **kwargs: str) -> bool:
+    #     """Add to the database.
 
-        write data to random database created in other method
-        returns
-        output_value: success
-        output_type: bool
-        """
-        client = self.get_fauna_connection()
-        database: str = kwargs["database"]
-        collection_name = kwargs["collection_name"]
-        data_to_add = kwargs["data_to_add"]
-        try:
-            query = client.query(q.get(q.database(database)))
-            try:
-                collection_name_generated = client.query(q.collection(collection_name))
-                logging.debug(collection_name_generated)
-                logging.debug(data_to_add)
-                return True
-            except (Exception) as _error:  # pragma: no cover
-                raise ValueError("Fauna error.") from _error
-        except (Exception) as _error:  # pragma: no cover
-            raise ValueError("Fauna error.") from _error
+    #     write data to random database created in other method
+    #     returns
+    #     output_value: success
+    #     output_type: bool
+    #     minimum we need is a collection then an index then a record
+    #     this record will come from the file data generated elsewhere
+    #     """
+    #     client = self.get_fauna_connection()
+    #     # database: str = kwargs["database"]
+    #     database_name_temp: str = 'satnightdb'
+    #     collection_name = kwargs["collection_name"]
+    #     data_to_add = kwargs["data_to_add"]
+    #     # need to get database ref id correct it is currently using "collection=Ref(id=databases)"
+    #     # instead of the correct name
+    #     try:
+    #         # query = client.query(q.get(q.database(database)))
+    #         # query = client.query(q.create_database({"name": database_name_temp}))
+    #         query = client.query(q.get(q.database(database_name_temp)))
+    #         try:
+    #             # collection_name_generated = client.query(q.collection(collection_name))
+    #             # collection_name_generated = client.query(q.create_collection({"name": collection_name}))
+    #             # collection_name_generated = client.query(q.create_collection({"name": "collectionmanual1"}))
+    #             query = client.query(q.get(q.database(database_name_temp)))
+    #             fauna_client.query2(q.create_collection({"name": collection_name}))
+    #             # ient.query(q.create_collection({"name": "posts"}))
+    #             # logging.debug(collection_name_generated)
+    #             # logging.debug(database)
+    #             logging.debug(data_to_add)
+    #             return True
+
+    #         except BadRequest as _error:  # pragma: no cover
+    #             raise ValueError("Fauna error collection create.") from _error
+    #     except (Exception) as _error:  # pragma: no cover
+    #         raise ValueError("Fauna error.") from _error
+
+
+# serverClient.query(
+#   q.create_index(
+#     {
+#       "name": "posts_by_title",
+#       "source": q.collection("posts"),
+#       "terms": [{"field": ["data", "title"]}]
+#     }
+#   ))
