@@ -84,14 +84,14 @@ class DataBaseOperationFunctions:
         database: str = kwargs["database"]
         collection_name = kwargs["collection_name"]
         data_to_add = kwargs["data_to_add"]
-        logging.debug(database)
-        logging.debug(collection_name)
-        logging.debug(client)
-        logging.debug(data_to_add)
         try:
-            # add collections
-            # query = client.query(q.
-            # query = client.query(q.create_database({"name": database}))
-            return True
+            query = client.query(q.get(q.database(database)))
+            try:
+                collection_name_generated = client.query(q.collection(collection_name))
+                logging.debug(collection_name_generated)
+                logging.debug(data_to_add)
+                return True
+            except (Exception) as _error:  # pragma: no cover
+                raise ValueError("Fauna error.") from _error
         except (Exception) as _error:  # pragma: no cover
-            raise ValueError("Unable to write to database.") from _error
+            raise ValueError("Fauna error.") from _error
