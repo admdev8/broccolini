@@ -3,7 +3,7 @@
 
 ## 0.1.1
 
-Version in progress - current branch as of September 2020:
+Updated to add additional functions:
 
 ## 0.1.0
 
