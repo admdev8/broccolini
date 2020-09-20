@@ -50,5 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
+          # OUTPUT_FOLDER  #defaults to super-linter.report
+          # PYTHON_PYLINT_CONFIG_FILE
 
 ...

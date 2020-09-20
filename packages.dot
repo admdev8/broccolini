@@ -1,0 +1,10 @@
+digraph "packages" {
+charset="utf-8"
+rankdir=BT
+"0" [label="broccolini", shape="box"];
+"1" [label="broccolini.authentication_functions", shape="box"];
+"2" [label="broccolini.database_operations", shape="box"];
+"3" [label="broccolini.fileoperation_functions", shape="box"];
+"4" [label="broccolini.json_functions", shape="box"];
+"5" [label="broccolini.notifications", shape="box"];
+}

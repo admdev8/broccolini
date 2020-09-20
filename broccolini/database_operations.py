@@ -3,9 +3,8 @@
 DataBase operations.
 """
 import logging
-import shortuuid
-
 from typing import Tuple, Any
+import shortuuid
 from faunadb import query as q
 from faunadb.client import FaunaClient
 
