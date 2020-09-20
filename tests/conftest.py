@@ -30,10 +30,10 @@ def return_data_dict():
         fauna_secret_path="greg_production/faunadb/api_token",
         fauna_test_database=r"froglegs01_new",
         fauna_test_collection_name=r"collection_from_conftest",
-        fauna_test_test_data=r"string formatted test data from conftest",
+        fauna_test_data=r"string formatted test data from conftest",
         fauna_secret_path_track_training="greg_production/faunadb/database_specific/track_training/api_token",
         fauna_test_database_track_training="track_training",
-        fauna_collection_name_track_training="books",
+        fauna_collection_name_track_training="Source",
     )
     return input_dict
 
