@@ -92,3 +92,13 @@ class TestDatabaseOperationsFunctions:
         assert isinstance(result, expected_type)
         assert expected in result[2]
         logging.debug(result[2])
+
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_add_to_database(return_data_dict):
+        """Test Fauna DB add."""
+        client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path"])
+        result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database()
+        expected_type = bool
+        assert isinstance(result, expected_type)
+        logging.debug(result)

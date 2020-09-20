@@ -71,6 +71,18 @@ class DataBaseOperationFunctions:
         except (Exception) as _error:  # pragma: no cover
             raise ValueError("Unable to create database.") from _error
 
+    def fauna_add_to_database(self) -> Tuple[bool, Any, str]:
+            """Add to the database.
+
+            write data to random database created in other method
+            returns
+            output_value: success
+            output_type: bool
+            """
+            return True
+
+# database = f"test_db_{shortuuid.uuid()}"
+# fauna_add_to_database
     # def fauna_write_database(self) -> FaunaClient:
     #     """Write to fauna database.
     #     2020-09-16 00:01:01,436 - DEBUG -
