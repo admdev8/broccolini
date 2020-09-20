@@ -34,12 +34,12 @@ def return_data_dict():
         output_file_name=r"./tests/__output_files/output_json_files.json",
         input_directory_path=r"",
         fauna_secret_path="greg_production/faunadb/api_token",
-        fauna_test_database=r"froglegs01_new",
+        fauna_test_database=r"database_for_github",
         fauna_test_collection_name=r"collection_from_conftest",
         fauna_test_data=r"string formatted test data from conftest",
-        fauna_secret_path_track_training="greg_production/faunadb/database_specific/track_training/api_token",
-        fauna_test_database_track_training="track_training",
-        fauna_collection_name_track_training="Source",
+        fauna_secret_path_server="greg_production/faunadb/database_specific/server/api_token",
+        fauna_test_github_database="database_for_github",
+        # fauna_collection_name_track_training="Source",
         fauna_test_bad_database=r"bad_database",
     )
     return input_dict
