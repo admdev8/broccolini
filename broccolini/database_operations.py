@@ -63,12 +63,10 @@ class DataBaseOperationFunctions:
         except (Exception) as _error:  # pragma: no cover
             raise ValueError("Unable to create database.") from _error
 
-    def fauna_read_database(self, **kwargs: str) -> Dict[List[str], Any]:
+    def fauna_read_database(self) -> Dict[List[str], Any]:
         """Read from fauna database."""
-        client = self.get_fauna_connection()
-        database: str = kwargs["database"]
-        # collection_name: str = kwargs["collection_name"]
         try:
+            client = self.get_fauna_connection()
             indexes = client.query(q.paginate(q.indexes()))
             return indexes
         except (Exception) as _error:  # pragma: no cover
@@ -79,7 +77,7 @@ class DataBaseOperationFunctions:
         client = self.get_fauna_connection()
         database: str = kwargs["database"]
         collection_name: str = kwargs["collection_name"]
-        return database, collection_name
+        return database, collection_name, client
         # try:
         #     indexes = client.query(q.paginate(q.indexes()))
         #     return indexes
