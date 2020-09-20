@@ -6,10 +6,8 @@ Testing common Database operations. Starting with www.faunadb.com.
 """
 
 import logging
-import shortuuid
 import pytest
 from faunadb.client import FaunaClient
-
 from broccolini.authentication_functions import VaultFunctions
 from broccolini.database_operations import DataBaseOperations
 
@@ -34,7 +32,7 @@ class TestDatabaseOperations:
                 secret_path=secret_path,
             )
             return fauna_secret_key["data"]["data"]["_key"]
-        except KeyError as _error:
+        except KeyError as _error:  # pragma: no cover
             raise ValueError("Missing environment variables") from _error
 
     @staticmethod
@@ -56,12 +54,15 @@ class TestDatabaseOperations:
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
-    def test_fauna_create_database(return_data_dict):
+    def test_fauna_create_database(return_data_dict, return_random_uuid):
         """Test Fauna DB create."""
+        database = f"database_{return_random_uuid}"
         client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
-        result = DataBaseOperations(client_token=client_token).fauna_create_database()
+        result = DataBaseOperations(client_token=client_token).fauna_create_database(
+            database=database,
+        )
         expected_type = tuple
-        expected = "test_db_"
+        expected = "_conftest_"
         assert isinstance(result, expected_type)
         assert expected in result[2]
 
@@ -78,29 +79,69 @@ class TestDatabaseOperations:
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
-    def test_fauna_create_collection(return_data_dict):
+    def test_fauna_create_collection(return_data_dict, return_random_uuid):
         """Test Fauna DB create collection."""
-        collection_name = f"test_collection_{shortuuid.uuid()}"
+        collection_name = f"collection_{return_random_uuid}"
         client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_track_training"])
         result = DataBaseOperations(client_token=client_token).fauna_create_collection(
-            # collection_name=return_data_dict["fauna_collection_name_track_training"],
-            collection_name=collection_name
+            collection_name=collection_name,
         )
         expected_0 = True
-        expected_1 = "test_collection_"
+        expected_1 = "_conftest_"
         assert result[0] == expected_0
         assert expected_1 in result[1]
+        logging.debug(result)
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
-    def test_fauna_add_records(return_data_dict):
+    def test_fauna_add_records(return_data_dict, return_random_uuid):
         """Test Fauna DB add records."""
+        collection_name = f"collection_{return_random_uuid}"
         client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_track_training"])
         result = DataBaseOperations(client_token=client_token).fauna_add_records(
-            # database,
-            collection_name=return_data_dict["fauna_collection_name_track_training"],
+            collection_name=collection_name,
             records_to_add=return_data_dict["fauna_test_data"],
         )
-        logging.debug(result)
-        # expected_type = dict
-        # assert isinstance(result, expected_type)
+        expected_type = dict
+        expected = "id=collection_conftest_"
+        assert isinstance(result, expected_type)
+        assert expected in str(result["ref"])
+
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_delete_database(return_data_dict, return_random_uuid):
+        """Test Fauna DB delete database."""
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        database = f"database_{return_random_uuid}"
+        result = DataBaseOperations(client_token=client_token).fauna_delete_database(
+            database=database,
+        )
+        expected_type = dict
+        expected = "id=database_conf"
+        assert isinstance(result, expected_type)
+        assert expected in str(result)
+
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_delete_database_exception(return_data_dict):
+        """Test Fauna DB delete database exception."""
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        with pytest.raises(ValueError):
+            DataBaseOperations(client_token=client_token).fauna_delete_database(
+                database=return_data_dict["fauna_test_bad_database"],
+            )
+
+    @staticmethod
+    @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    def test_fauna_paginate_database(return_data_dict):
+        """Test Fauna paginate database."""
+        client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path"])
+        result = DataBaseOperations(client_token=client_token).fauna_paginate_database()
+        # logging.debug(result['data'])
+        # import pprint as pp
+        # pp.pprint(result['data'])
+        # dict of dict with data that has a list of links
+        expected_type = dict
+        expected = r"collection=Ref(id=databases"
+        assert isinstance(result, expected_type)
+        assert expected in str(result["data"])

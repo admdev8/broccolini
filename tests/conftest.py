@@ -5,9 +5,15 @@
 Give data in various forms to the test functions.
 """
 import random
-
+import shortuuid
 import pytest
 from faker import Faker
+
+
+@pytest.fixture(scope="session")
+def return_random_uuid():
+    """Provide random values."""
+    return f"conftest_{shortuuid.uuid()}"
 
 
 @pytest.fixture()
@@ -34,6 +40,7 @@ def return_data_dict():
         fauna_secret_path_track_training="greg_production/faunadb/database_specific/track_training/api_token",
         fauna_test_database_track_training="track_training",
         fauna_collection_name_track_training="Source",
+        fauna_test_bad_database=r"bad_database",
     )
     return input_dict
 

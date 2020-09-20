@@ -3,16 +3,11 @@
 DataBase operations.
 """
 import logging
-
-# from os import truncate
 from typing import List, Dict, Tuple, Any
-import shortuuid
 from faunadb import query as q
 from faunadb.client import FaunaClient
-
-# from faunadb.objects import Ref
-# from faunadb.errors import BadRequest
-
+from faunadb.errors import BadRequest
+from faunadb.objects import Ref
 
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
@@ -50,15 +45,13 @@ class DataBaseOperations:
         except Exception as _errorinfo:  # pragma: no cover
             raise ValueError("error connecting") from _errorinfo
 
-    def fauna_create_database(self) -> Tuple[bool, Any, str]:
+    def fauna_create_database(self, **kwargs: str) -> Tuple[bool, Any, str]:
         """Create database.
 
         create random database with shortuuid to ensure randomness
-        returns
-
         """
-        database = f"test_db_{shortuuid.uuid()}"
         client = self.get_fauna_connection()
+        database: str = kwargs["database"]
         try:
             query = client.query(q.create_database({"name": database}))
             return True, query, database
@@ -100,6 +93,23 @@ class DataBaseOperations:
             return client.query(
                 q.create(q.collection(collection_name), {"data": {"name": records_to_add, "element": ["air", "fire"]}})
             )
-            # return True
         except (Exception) as _error:  # pragma: no cover
+            raise ValueError("Fauna error.") from _error
+
+    def fauna_delete_database(self, **kwargs: str) -> Tuple[bool, Any, str]:
+        """Fauna delete database."""
+        client = self.get_fauna_connection()
+        database: str = kwargs["database"]
+        try:
+            return client.query(q.delete(q.database(database)))
+        except (BadRequest) as _error:  # pragma: no cover
+            raise ValueError("Fauna error.") from _error
+
+    def fauna_paginate_database(self) -> Tuple[bool, Any, str]:
+        """Fauna paginate database."""
+        client = self.get_fauna_connection()
+        # database: str = kwargs["database"]
+        try:
+            return client.query(q.paginate(Ref("databases")))
+        except (BadRequest) as _error:  # pragma: no cover
             raise ValueError("Fauna error.") from _error
