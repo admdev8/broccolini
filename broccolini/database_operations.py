@@ -70,7 +70,8 @@ class DataBaseOperationFunctions:
             return True, query, database
         except (Exception) as _error:  # pragma: no cover
             raise ValueError("Unable to create database.") from _error
-# def send_twilio_notification(self, **kwargs: str) -> str:
+
+    # def send_twilio_notification(self, **kwargs: str) -> str:
     def fauna_add_to_database(self, **kwargs: str) -> bool:
         """Add to the database.
 
@@ -79,9 +80,17 @@ class DataBaseOperationFunctions:
         output_value: success
         output_type: bool
         """
-        database = self.fauna_create_database()
+        # client = self.get_fauna_connection()
+        database = kwargs["database"]
         logging.debug(database)
-        return True
+        try:
+            # add collections
+            # query = client.query(q.
+            # query = client.query(q.create_database({"name": database}))
+            return True
+        except (Exception) as _error:  # pragma: no cover
+            raise ValueError("Unable to write to database.") from _error
+        # return True
 
 
 # database = f"test_db_{shortuuid.uuid()}"
