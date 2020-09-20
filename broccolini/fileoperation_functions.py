@@ -42,11 +42,15 @@ class FileOperationFunctions:
             modification date - from pathlib
         """
         input_path: Path = kwargs["input_path"]
-        output_dict: Dict[str, object] = dict(folders_and_files=list(input_path.rglob("*.*")),)
+        output_dict: Dict[str, object] = dict(
+            folders_and_files=list(input_path.rglob("*.*")),
+        )
         return output_dict
 
     @staticmethod
-    def get_file_information_build(**kwargs: str,) -> List[Dict[str, object]]:
+    def get_file_information_build(
+        **kwargs: str,
+    ) -> List[Dict[str, object]]:
         """Build data about file structure.
 
         input: input_directory
