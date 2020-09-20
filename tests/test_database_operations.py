@@ -69,11 +69,9 @@ class TestDatabaseOperationsFunctions:
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
     def test_fauna_read_database(return_data_dict):
         """Test Fauna DB read."""
-        client_token = TestDatabaseOperationsFunctions.get_test_values(
-            return_data_dict["fauna_secret_path_track_training"]
-        )
-    #     result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
-    #         database=database[2],
+        client_token = TestDatabaseOperationsFunctions.get_test_values(return_data_dict["fauna_secret_path_track_training"])
+        #     result = DataBaseOperationFunctions(client_token=client_token).fauna_add_to_database(
+        #         database=database[2],
         result = DataBaseOperationFunctions(client_token=client_token).fauna_read_database(
             database=return_data_dict["fauna_test_database_track_training"],
             collection_name=return_data_dict["fauna_collection_name_track_training"],
@@ -120,7 +118,6 @@ class TestDatabaseOperationsFunctions:
 
     # #     expected_type = bool
     # #     assert isinstance(result, expected_type)
-
 
     # # curl -H 'Authorization: Bearer <FAUNA_SECRET>' https://{hostname}/import?mode=override --data-binary "@path/to/schema.gql"
     # # Authorization: Bearer fnADMxRzydATDKibGAciQlNQWBs-HJdpJS1vJaIM
