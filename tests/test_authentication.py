@@ -76,7 +76,6 @@ class TestVaultFunctions:
         creation_time = result[1]["data"]["created_time"]
         assert expected_1 in creation_time
         assert isinstance(result, expected_type)
-        # logging.debug(result)
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_vault"])

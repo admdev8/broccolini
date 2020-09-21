@@ -5,7 +5,6 @@
 Testing json operations.  Mostly wrappers.
 """
 import logging
-
 from broccolini.json_functions import JsonFunctions
 
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")

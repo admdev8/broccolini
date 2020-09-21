@@ -7,8 +7,6 @@ import logging
 from pathlib import Path
 from typing import Dict, List
 
-# from broccolini.json_functions import JsonFunctions
-
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
 
@@ -63,19 +61,9 @@ class FileOperationFunctions:
         folder_list: List[Path] = []
         for each in path.iterdir():
             folder_list.append(each)
-        logging.debug(folder_list)
 
         output_listing: List[Dict[str, object]] = []
         for each in folder_list:
-            # logging.debug(type(each))
             write_to_json: Dict[str, object] = FileOperationFunctions.build_dictionary(input_path=each)
-            # sending a path not a list
-            logging.debug(each)
-            logging.debug("\n")
-
-            # not sending a list acting on each file in the for loop
-            # collecting data in write to json
-            # then writing write_to_json to json file on distk
             output_listing.append(write_to_json)
-        logging.debug(output_listing)
         return output_listing

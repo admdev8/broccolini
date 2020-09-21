@@ -33,8 +33,6 @@ class JsonFunctions:
         """
         input_list = kwargs["input_list"]
         output_file_name: str = kwargs["output_file_name"]
-        # output_folder: str = kwargs["output_folder"]
-        logging.debug(type(input_list))
         with open(output_file_name, "w") as file_handle:
             json.dump(input_list, file_handle)
         return True, f"successfully wrote file:{output_file_name}"
