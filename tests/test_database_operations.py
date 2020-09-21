@@ -71,13 +71,11 @@ class TestDatabaseOperations:
     def test_fauna_read_database(return_data_dict):
         """Test Fauna DB read."""
         client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_server"])
-        logging.debug(client_token)
         result = DataBaseOperations(client_token=client_token).fauna_read_database()
         expected_type = dict
-        # expected = "TrainingMaterialsByCompletedFlag"
+        expected = "id=all_storehouses"
         assert isinstance(result, expected_type)
-        # assert expected in str(result["data"])
-        # logging.debug(result)
+        assert expected in str(result["data"])
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
@@ -92,7 +90,6 @@ class TestDatabaseOperations:
         expected_1 = "_conftest_"
         assert result[0] == expected_0
         assert expected_1 in result[1]
-        logging.debug(result)
 
     @staticmethod
     @pytest.mark.dependency(depends=["test_login_to_fauna"])
@@ -139,11 +136,6 @@ class TestDatabaseOperations:
         """Test Fauna paginate database."""
         client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_admin"])
         result = DataBaseOperations(client_token=client_token).fauna_paginate_database()
-        logging.debug(result["data"])
-        import pprint as pp
-
-        pp.pprint(result["data"])
-        # dict of dict with data that has a list of links
         expected_type = dict
         expected = r"collection=Ref(id=databases"
         assert isinstance(result, expected_type)
