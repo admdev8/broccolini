@@ -67,7 +67,7 @@ class TestFileOperationsFunctions:
         result = FileOperationFunctions().build_dictionary(
             input_path=Path(create_list_of_filenames_and_directories[1]),
         )
-        logging.debug(result)
+        # logging.debug(result)
         expected = "test_dir_created"
         expected_type, expected_len = dict, 9
         assert expected in str(result)
