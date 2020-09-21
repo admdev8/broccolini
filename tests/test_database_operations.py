@@ -140,8 +140,9 @@ class TestDatabaseOperations:
         client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_admin"])
         result = DataBaseOperations(client_token=client_token).fauna_paginate_database()
         logging.debug(result["data"])
-        # import pprint as pp
-        # pp.pprint(result['data'])
+        import pprint as pp
+
+        pp.pprint(result["data"])
         # dict of dict with data that has a list of links
         expected_type = dict
         expected = r"collection=Ref(id=databases"

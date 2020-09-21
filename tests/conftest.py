@@ -35,7 +35,7 @@ def return_data_dict():
         input_directory_path=r"",
         fauna_secret_path_admin="greg_production/faunadb/api_token",
         fauna_test_database=r"database_for_github",
-        fauna_test_collection_name=r"collection_from_conftest",
+        # fauna_test_collection_name=r"collection_from_conftest",
         fauna_test_data=r"string formatted test data from conftest",
         fauna_secret_path_server="greg_production/faunadb/database_specific/server/api_token",
         fauna_test_github_database="database_for_github",
