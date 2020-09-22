@@ -67,3 +67,24 @@ class FileOperationFunctions:
             write_to_json: Dict[str, object] = FileOperationFunctions.build_dictionary(input_path=each)
             output_listing.append(write_to_json)
         return output_listing
+
+    @staticmethod
+    def filter_file_data(**kwargs: str) -> List[Dict[str, object]]:
+        """Filter data.
+
+        input: dictionary_of_paths_in_pathlib_format
+        input_type = input_directory
+        output: output_dictionary
+        output_type = List[Dict[str, str]]
+        """
+        input_path: Dict[List[str]] = kwargs["input_path"]
+        records_to_add = []
+        for each in input_path["folders_and_files"]:
+            records_to_add.append(
+                dict(
+                    file_name=each.name,
+                    file_suffix=each.suffix,
+                    parent_dir=each.parent,
+                )
+            )
+        return records_to_add

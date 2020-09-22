@@ -6,6 +6,7 @@ Testing common file operations including use of pathlib..
 """
 import logging
 from pathlib import Path
+import pytest
 
 from faker import Faker
 
@@ -56,7 +57,8 @@ class TestFileOperationsFunctions:
         assert len(result) >= expected_len
 
     @staticmethod
-    def test_build_dictionary(create_list_of_filenames_and_directories):
+    @pytest.fixture()
+    def test_build_dictionary_of_files(create_list_of_filenames_and_directories):
         """Get the test directory from conftest to run tests.
 
         Gets folder path from conftest and feeds to the function as a pathlib object
@@ -69,3 +71,15 @@ class TestFileOperationsFunctions:
         assert expected in str(result)
         assert isinstance(result, expected_type)
         assert len(result["folders_and_files"]) >= expected_len
+        return result
+
+    @staticmethod
+    def test_filter_file_data(test_build_dictionary_of_files):
+        """Filter data from the data provided by the other function."""
+        # logging.debug(test_build_dictionary_of_files)
+        result = FileOperationFunctions().filter_file_data(
+            input_path=test_build_dictionary_of_files,
+        )
+        expected_type = list
+        assert isinstance(result, expected_type)
+        # logging.debug(result["subject"])

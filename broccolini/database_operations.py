@@ -91,7 +91,14 @@ class DataBaseOperations:
         collection_name: str = kwargs["collection_name"]
         try:
             return client.query(
-                q.create(q.collection(collection_name), {"data": {"name": records_to_add, "element": ["air", "fire"]}})
+                q.create(
+                    q.collection(collection_name),
+                    {
+                        "data": {
+                            "name": records_to_add,
+                        }
+                    },
+                )
             )
         except (Exception) as _error:  # pragma: no cover
             raise ValueError("Fauna error.") from _error
