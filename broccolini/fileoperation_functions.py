@@ -120,7 +120,7 @@ class FileOperationFunctions:
                     # size=each.each.stat().st_size,
                     parent_dir_up_2=each.parent.parent,
                     parent_dir_up_3=each.parent.parent.parent,
-                    parent_list = list(each.parents)
+                    parent_list=list(each.parents),
                 )
             )
         return records_to_add
