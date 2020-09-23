@@ -83,3 +83,6 @@ class TestFileOperationsFunctions:
         expected_type = list
         assert isinstance(result, expected_type)
         # logging.debug(result["subject"])
+        for each in result:
+            print(f"{each}\n")
+        # logging.debug(result)

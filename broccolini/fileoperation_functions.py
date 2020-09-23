@@ -68,6 +68,15 @@ class FileOperationFunctions:
             output_listing.append(write_to_json)
         return output_listing
 
+    # def is_this_valid_subject(self) -> bool:
+    #     """Filter data.
+    #     do 1 or 2 tests
+    #     is the text followed by training/*
+    #     does the training meet one of these group
+    #     """
+    #     input_subject_name = self.possible_subject_name
+    #     valid_subjects = ['python', 'javascript', 'ml', 'ai', 'network', 'general']
+
     @staticmethod
     def filter_file_data(**kwargs: str) -> List[Dict[str, object]]:
         """Filter data.
@@ -76,8 +85,12 @@ class FileOperationFunctions:
         input_type = input_directory
         output: output_dictionary
         output_type = List[Dict[str, str]]
+        # to get the subject
+        # do a quick regex to find the parent after the text created/training/TEXTHEREISWHATWEWANT
+        # -bachs1x/pytest-669/test_dir_created0/test_dir_created/training/javascript/subdir_3/seek.txt')
         """
         input_path: Dict[List[str]] = kwargs["input_path"]
+        # subject = 'unknown_subject'
         records_to_add = []
         for each in input_path["folders_and_files"]:
             records_to_add.append(
@@ -85,6 +98,12 @@ class FileOperationFunctions:
                     file_name=each.name,
                     file_suffix=each.suffix,
                     parent_dir=each.parent,
+                    creation_time=each.stat().st_ctime,
+                    mod_time=each.stat().st_mtime,
+                    size=each.stat().st_size,
+                    # size=each.each.stat().st_size,
+                    parent_dir_up_2=each.parent.parent,
+                    parent_dir_up_3=each.parent.parent.parent,
                 )
             )
         return records_to_add
