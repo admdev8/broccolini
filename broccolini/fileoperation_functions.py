@@ -78,6 +78,20 @@ class FileOperationFunctions:
     #     valid_subjects = ['python', 'javascript', 'ml', 'ai', 'network', 'general']
 
     @staticmethod
+    def filter_subject_from_list(**kwargs: str) -> List[Dict[str, object]]:
+        """When given list of parents in pathlib format - search for the line we need
+
+        Given list like this:
+        WindowsPath('C:/Users/bachs1x/AppData/Local/Temp/pytest-of-bachs1x/pytest-690/test_dir_created0/
+        test_dir_created/training/network/subdir_3'),
+        get the text following training/
+        input: list_of_pathlib_files
+        input_type = List[Pathlib]
+        """
+        input_list: List[Path] = kwargs["input_list"]
+        return input_list
+
+    @staticmethod
     def filter_file_data(**kwargs: str) -> List[Dict[str, object]]:
         """Filter data.
 
@@ -88,6 +102,8 @@ class FileOperationFunctions:
         # to get the subject
         # do a quick regex to find the parent after the text created/training/TEXTHEREISWHATWEWANT
         # -bachs1x/pytest-669/test_dir_created0/test_dir_created/training/javascript/subdir_3/seek.txt')
+        x = "Success!" if (y == 2) else "Failed!"
+        x = "valid" if in list else failed  or do a dictionary lookup of the valid subjects
         """
         input_path: Dict[List[str]] = kwargs["input_path"]
         # subject = 'unknown_subject'
@@ -104,6 +120,7 @@ class FileOperationFunctions:
                     # size=each.each.stat().st_size,
                     parent_dir_up_2=each.parent.parent,
                     parent_dir_up_3=each.parent.parent.parent,
+                    parent_list = list(each.parents)
                 )
             )
         return records_to_add

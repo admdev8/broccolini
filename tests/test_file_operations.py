@@ -86,3 +86,14 @@ class TestFileOperationsFunctions:
         for each in result:
             print(f"{each}\n")
         # logging.debug(result)
+
+    @staticmethod
+    def test_filter_subject_from_list(test_build_dictionary_of_files):
+        """Filter data from the data provided by the other function."""
+        temp_list = ["test_dir_created/training/network/subdir_3')"]
+        result = FileOperationFunctions().filter_subject_from_list(
+            input_list=temp_list,
+        )
+        expected_type = list
+        logging.debug(result)
+        assert isinstance(result, expected_type)
