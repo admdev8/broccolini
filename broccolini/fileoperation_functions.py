@@ -4,6 +4,7 @@ File operations, eg, open close read write.
 """
 
 import logging
+import re
 from pathlib import Path
 from typing import Dict, List
 
@@ -68,31 +69,35 @@ class FileOperationFunctions:
             output_listing.append(write_to_json)
         return output_listing
 
-    # def is_this_valid_subject(self) -> bool:
-    #     """Filter data.
-    #     do 1 or 2 tests
-    #     is the text followed by training/*
-    #     does the training meet one of these group
-    #     """
-    #     input_subject_name = self.possible_subject_name
-    #     valid_subjects = ['python', 'javascript', 'ml', 'ai', 'network', 'general']
-
     @staticmethod
-    def filter_subject_from_list(**kwargs: str) -> List[Dict[str, object]]:
-        """When given list of parents in pathlib format - search for the line we need
+    def filter_subject_from_list(**kwargs: str) -> str:
+        """When given list of parents in pathlib format - search for the relevant line
 
-        Given list like this:
-        WindowsPath('C:/Users/bachs1x/AppData/Local/Temp/pytest-of-bachs1x/pytest-690/test_dir_created0/
-        test_dir_created/training/network/subdir_3'),
-        get the text following training/
+        Note - return on first match is good because the list refers to the same path
+
         input: list_of_pathlib_files
         input_type = List[Pathlib]
+        output: match[1]
+        output_type: str
         """
-        input_list: List[Path] = kwargs["input_list"]
-        return input_list
+        subject = "subject_not_available"
+        input_list = kwargs["input_list"]
+        pattern = kwargs["pattern"]
+        regexp = re.compile(pattern)
+
+        for each in input_list:
+            path = Path(each)
+            text_path_name = str(path.resolve())
+            match = re.match(regexp, text_path_name)
+            if (match := re.match(regexp, text_path_name)) is not None:
+                subject = match[1]
+            else:
+                subject = "subject_not_available"
+                # print(f"missing:{text_path_name}:\n {pattern}\n")
+        return subject
 
     @staticmethod
-    def filter_file_data(**kwargs: str) -> List[Dict[str, object]]:
+    def filter_file_data(**kwargs) -> List[Dict[str, object]]:
         """Filter data.
 
         input: dictionary_of_paths_in_pathlib_format
@@ -105,7 +110,8 @@ class FileOperationFunctions:
         x = "Success!" if (y == 2) else "Failed!"
         x = "valid" if in list else failed  or do a dictionary lookup of the valid subjects
         """
-        input_path: Dict[List[str]] = kwargs["input_path"]
+        # input_path: Dict[List[str], Dict[str, object]] = kwargs["input_path"]
+        input_path = kwargs["input_path"]
         # subject = 'unknown_subject'
         records_to_add = []
         for each in input_path["folders_and_files"]:

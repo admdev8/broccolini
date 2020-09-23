@@ -72,3 +72,35 @@ class TestIntegrationFileToFauna:
             records_to_add=records_to_add,
         )
         return result
+
+        # @pytest.mark.skip(reason="integration testing")
+        # def test_write_files_to_fauna_db_updated_with_filtering_function(
+        # self, return_data_dict, return_random_uuid, test_get_files_from_folder
+        # ):
+        #     """Put list of files into fauna database using data from different function in file operations.
+
+        #     input: list
+        #     output or side effect: fauna database
+        #     """
+        #     collection_name = f"collection_{return_random_uuid}"
+        #     client_token = TestIntegrationFileToFauna.get_test_values(return_data_dict["fauna_secret_path_server"])
+        #     records_to_add = []
+        #     # result = test_get_files_from_folder
+        #     # for each in result:
+        #     #     records_to_add.append(str(each["folders_and_files"]))
+        #     # get result from other funciton and add to fauna
+        #     # start with just one record that is working in test file
+
+        #     records_to_add = []
+
+        #     DataBaseOperations(client_token=client_token).fauna_create_collection(
+        #         collection_name=collection_name,
+        #     )
+        #     result = DataBaseOperations(client_token=client_token).fauna_add_records(
+        #         collection_name=collection_name,
+        #         records_to_add=records_to_add,
+        #     )
+        # open the json file and compute the subject name from that one before the write
+        # In the integartion test function put the parent dir from json in to get the subject
+
+        # return result

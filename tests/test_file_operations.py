@@ -6,11 +6,14 @@ Testing common file operations including use of pathlib..
 """
 import logging
 from pathlib import Path
+
+# from typing import Pattern
 import pytest
 
 from faker import Faker
 
 from broccolini.fileoperation_functions import FileOperationFunctions
+from broccolini.json_functions import JsonFunctions
 
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 
@@ -74,26 +77,42 @@ class TestFileOperationsFunctions:
         return result
 
     @staticmethod
-    def test_filter_file_data(test_build_dictionary_of_files):
+    @pytest.fixture()
+    def test_filter_file_data(test_build_dictionary_of_files, create_generic_json_test_file):
         """Filter data from the data provided by the other function."""
-        # logging.debug(test_build_dictionary_of_files)
         result = FileOperationFunctions().filter_file_data(
             input_path=test_build_dictionary_of_files,
         )
         expected_type = list
         assert isinstance(result, expected_type)
-        # logging.debug(result["subject"])
-        for each in result:
-            print(f"{each}\n")
-        # logging.debug(result)
+
+        input_list_for_json_one_record = [
+            dict(
+                file_name=result[0]["file_name"],
+                file_suffix=result[0]["file_suffix"],
+                parent_dir=str(result[0]["parent_dir"]),
+                creation_time=result[0]["creation_time"],
+                mod_time=result[0]["mod_time"],
+                size=result[0]["size"],
+                parent_list=str(result[0]["parent_list"]),
+            )
+        ]
+
+        JsonFunctions().write_list_to_json(
+            input_list=input_list_for_json_one_record,
+            output_file_name=create_generic_json_test_file,
+        )
+        return result
 
     @staticmethod
-    def test_filter_subject_from_list(test_build_dictionary_of_files):
-        """Filter data from the data provided by the other function."""
-        temp_list = ["test_dir_created/training/network/subdir_3')"]
+    def test_file_filter_subject_from_list(test_filter_file_data):
+        """Filter subject data using re module."""
+        input_list = test_filter_file_data[0]["parent_list"]
+        pattern = r".*training\\(\w*)"
         result = FileOperationFunctions().filter_subject_from_list(
-            input_list=temp_list,
+            # input_list=parent_list,
+            input_list=input_list,
+            pattern=pattern,
         )
-        expected_type = list
-        logging.debug(result)
+        expected_type = str
         assert isinstance(result, expected_type)
