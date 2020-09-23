@@ -64,9 +64,6 @@ class TestIntegrationFileToFauna:
         # for each in result:
         #     records_to_add.append(str(each["folders_and_files"]))
 
-
-
-
         DataBaseOperations(client_token=client_token).fauna_create_collection(
             collection_name=collection_name,
         )
