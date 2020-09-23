@@ -61,8 +61,11 @@ class TestIntegrationFileToFauna:
         client_token = TestIntegrationFileToFauna.get_test_values(return_data_dict["fauna_secret_path_server"])
         records_to_add = []
         result = test_get_files_from_folder
-        for each in result:
-            records_to_add.append(str(each["folders_and_files"]))
+        # for each in result:
+        #     records_to_add.append(str(each["folders_and_files"]))
+
+
+
 
         DataBaseOperations(client_token=client_token).fauna_create_collection(
             collection_name=collection_name,
