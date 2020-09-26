@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - 
 class TestFileOperationsFunctions:
     """Test File Operation Functions.
 
-    Build test directory with data.
+    Build test directory with data from conftest.
     """
 
     @staticmethod

@@ -140,3 +140,21 @@ class TestDatabaseOperations:
         expected = r"collection=Ref(id=databases"
         assert isinstance(result, expected_type)
         assert expected in str(result["data"])
+
+    # @staticmethod
+    # @pytest.mark.dependency(depends=["test_login_to_fauna"])
+    # def test_fauna_delete_collection(return_data_dict, return_random_uuid):
+    #     """Test Fauna DB delete collection.
+
+    #     Problem to watch out for is making sure you are working on the correct collection
+    #     and correct database.
+    #     """
+    #     collection_name = f"collection_{return_random_uuid}"
+    #     client_token = TestDatabaseOperations.get_test_values(return_data_dict["fauna_secret_path_server"])
+    #     result = DataBaseOperations(client_token=client_token).fauna_delete_collection(
+    #         collection_name=collection_name,
+    #         # client.query(q.delete(q.collection("dilapidated_huts")))
+    #     )
+
+    #     logging.debug(result)
+    #     assert result == collection_name
