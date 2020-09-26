@@ -30,7 +30,7 @@ faunadb = "^3.0.0"
 shortuuid = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^6.0"
 pre-commit = "^2.7.1"
 pylama = "^7.7.1"
 pytest-dependency = "^0.5.1"
