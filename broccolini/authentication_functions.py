@@ -34,6 +34,26 @@ class VaultFunctions:
         """Display function name using str."""
         return str(self)
 
+    def unseal_vault(self, **kwargs: str) -> bool:
+        """Unseal vault."""
+        try:
+            _vault_url: str = kwargs["vault_url"]
+            _vault_token: str = kwargs["vault_token"]
+            client = self.get_vault_credentials(vault_url=_vault_url, vault_token=_vault_token)
+            try:
+                if client.sys.is_sealed():
+                    vault_unseal_token: str = os.environ[kwargs["vault_unseal_token"]]
+                    client.sys.submit_unseal_key(vault_unseal_token)
+                    # return True
+                else:
+                    print("Vault is sealed")
+                return True
+            except (hvac.exceptions.Forbidden) as _error:
+                # pragma: no cover
+                raise ValueError("Bad unseal token") from _error
+        except (hvac.exceptions.Forbidden) as _error:  # pragma: no cover
+            raise ValueError("Permission Denied, please check your permissions and the path to the secret") from _error
+
     @staticmethod
     def get_vault_credentials(**kwargs: str) -> Client:
         """Login to vault using credentials and return client."""

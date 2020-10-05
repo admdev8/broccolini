@@ -23,4 +23,3 @@ This directory is a collection of utilities helpful for my work process. It is h
 - build working vault dev server
 - create environment variables
 - pytest -vv -s
-- fix any issues
