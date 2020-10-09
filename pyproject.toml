@@ -38,7 +38,7 @@ coverage = "^5.2"
 pylint = "^2.5.3"
 black = { version = "*", allow-prereleases = true }
 bandit = "^1.6.2"
-mypy = "^0.782"
+mypy = "^0.790"
 pydocstyle = "^5.0.2"
 pytest-cov = "^2.10.0"
 faker = "^4.1.2"
