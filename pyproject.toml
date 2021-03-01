@@ -34,7 +34,7 @@ pytest = "^6.0"
 pre-commit = "^2.7.1"
 pylama = "^7.7.1"
 pytest-dependency = "^0.5.1"
-coverage = "^5.2"
+coverage = "^5.5"
 pylint = "^2.5.3"
 black = { version = "*", allow-prereleases = true }
 bandit = "^1.6.2"
