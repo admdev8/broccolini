@@ -24,7 +24,7 @@ classifiers=[
 
 [tool.poetry.dependencies]
 python = "^3.8"
-twilio = "^6.45.1"
+twilio = "^6.61.0"
 hvac = "^0.10.5"
 faunadb = "^3.0.0"
 shortuuid = "^1.0.1"
